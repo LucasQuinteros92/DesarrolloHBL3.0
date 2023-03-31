@@ -1,6 +1,8 @@
 *.log
 *.jpg
 *.png
+*.zip
+*.h264
 __pycache__
 /log/*.log
 
