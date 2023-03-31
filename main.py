@@ -41,6 +41,7 @@ from modulos import funcionamiento as funcionamiento
 from modulos import Control_Personal as CP
 from modulos import SendMail
 from modulos import BioStar2_WebSocket
+from modulos import CamaraRPI
 
 from modulos.decoderWiegand import Decoder
 from modulos.encoderWiegand import Encoder

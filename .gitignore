@@ -1,4 +1,6 @@
 *.log
+*.jpg
+*.png
 __pycache__
 /log/*.log
 

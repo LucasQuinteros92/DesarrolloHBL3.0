@@ -335,6 +335,11 @@ def cargarParametros(archivo):
     global Mail_key
     global Mail_subject
     global Mail_activado
+
+    global Camara_RPI_activado
+    global Camara_RPI_Resolucion
+    global Camara_RPI_Path_Realativo
+    global Camara_RPI_Duracion_Video_seg
     
     global data
 
@@ -738,5 +743,10 @@ def cargarParametros(archivo):
     Mail_subject = data["Mail"]["subject"]
     Mail_key = data["Mail"]["key"]
    
+
+    Camara_RPI_activado = data["Camara_RPI"]["activado"]
+    Camara_RPI_Resolucion = data["Camara_RPI"]["Resolucion"]
+    Camara_RPI_Path_Realativo = data["Camara_RPI"]["Path_Relativo"]
+    Camara_RPI_Duracion_Video_seg  = data["Camara_RPI"]["Duracion_Video_seg"]
 
  
