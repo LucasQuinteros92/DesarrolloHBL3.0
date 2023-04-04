@@ -27,6 +27,9 @@ flagLog = 0
 global flagTeclado
 flagTeclado = 0
 
+global cCamaraRPI
+global cMail
+
 
 
 
@@ -93,7 +96,8 @@ def TareaFilmarVideo():
     log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Filmar Video") 
     ##SendMail.SendMail().__run(CamaraRPI.CamaraRPI().CapturarVideo(hbl.Camara_RPI_Duracion_Video_seg))
     ##SendMail.SendMail().__run(CamaraRPI.CamaraRPI().CapturarVideo(hbl.Camara_RPI_Duracion_Video_seg))
-    VG.path_last_capture = CamaraRPI.CamaraRPI().Capturar(0)
+    VG.path_last_capture = cCamaraRPI.Capturar(hbl.Camara_RPI_Duracion_Video_seg)
+    #VG.path_last_capture = CamaraRPI.CamaraRPI().Capturar(hbl.Camara_RPI_Duracion_Video_seg)
     Avanzar_Tarea()
     
 def TareaCapturarFoto():
@@ -102,7 +106,7 @@ def TareaCapturarFoto():
 def TareaEnviarMail():
     log.escribeSeparador(hbl.LOGS_hblTareas)
     log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Enviar Mail") 
-    SendMail.SendMail().send(VG.path_last_capture)
+    cMail.send(asunto=hbl.Mail_subject,msg=hbl.Mail_message,path=VG.path_last_capture)
     Avanzar_Tarea()
     
 
@@ -228,9 +232,10 @@ def TareaConfirmacionReloj():
         log.escribeLineaLog(hbl.LOGS_hblTareas, "ERROR : PIN INVALIDO") 
         VG.NumeroTarea = 1
     else:
-        data = pi.read(pin)
-        if data == on:
+        VG.Contador_Entrada1
+        if VG.Contador_Entrada1 > 0:
             log.escribeLineaLog(hbl.LOGS_hblTareas, "Confirmacion de Reloj Recibida") 
+            VG.Contador_Entrada1 = 0
             Avanzar_Tarea()
             flagLog = 0
 
@@ -331,7 +336,14 @@ def TareaImprimir():
     log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Imprimir")
     PlantillasImpresora.ImpresionTest()
     Avanzar_Tarea()
-
+    
+    
+def inicializacion_clases():
+    global cCamaraRPI 
+    cCamaraRPI = CamaraRPI.CamaraRPI()
+    global cMail
+    cMail= SendMail.SendMail()
+    
 def Control(pi2):
     global pi
     pi = pi2

@@ -120,66 +120,69 @@ class Entradas(object):
         #log.escribeLineaLog(hbl.LOGS_hblEntradas, "Diff : " + str(diff))  
 
         VG.pressTick = tick
-        VG.IR1 = level
         
-        if VG.contador:
-            if VG.IR2:
-                if VG.IR1:
-                    if VG.Status == VG.Esperando_IR2:
-                        VG.Status = VG.Esperando_IR1
-                        print("IR1: Vuelvo a Esperar por IR1 ")
-                else:
-                    if VG.Status == VG.Esperando_IR1:
-                        VG.Status = VG.Esperando_IR2
-                        print("IR1: Esperando IR2")
-            else:
-                if VG.IR1:
-                    if VG.Status == VG.Esperando_IR1:
-                        VG.Status = VG.Esperando_IR1_IR2
-                        print("IR1: Esperando IR1 IR2")
-                else:
-                    if VG.Status == VG.Esperando_IR2:
-                        VG.Status = VG.Esperando_IR1
-                        print("IR1: vuelvo a Esperar  por IR1 ")
-                        
-                    elif VG.Status == VG.Esperando_IR1_IR2:
-                        VG.Status = VG.Esperando_Reloj
-                        print("IR1: Vuelvo a esperar por el reloj")
-        else:   #SECUENCIA INTRUSOS / SALIDAS
-            if VG.IR2:
-                if VG.IR1:
-                    if VG.Status == VG.VerificacionIntruso3:
-                        VG.Status = VG.VerificacionIntruso2
-                        print("IR1: Vuelvo a verificacion 2")
-                    elif VG.Status == VG.Esperando_IR1_IR2_Saliente:
-                        VG.Status = VG.Esperando_IR2
-                        print("IR1: Esperando IR2 Saliente")
-                    
-                else:
-                    if VG.Status == VG.VerificacionIntruso2:
-                        print("IR1: veri intruso 3")
-                        VG.Status = VG.VerificacionIntruso3
-                    if VG.Status == VG.Esperando_IR2:
-                        VG.Status = VG.Esperando_IR1_IR2_Saliente
-                        print("IR1: Vuelvo a Esperarar por IR1 IR2 Saliente")
-                    
-            else:
-                if VG.IR1 and VG.Status == VG.Esperando_Reloj:
-                    print("IR1: Verificacion Intruso 1")
-                    VG.Status = VG.VerificacionIntruso
-                else:
-                    if VG.Status == VG.VerificacionIntruso:
-                        print("Vuelvo a Esperar Por el Reloj")
-                        VG.Status = VG.Esperando_Reloj
-                    if VG.Status == VG.Esperando_IR1_Saliente:
-                        print("Salida Confirmada")
-                        VG.Status = VG.Persona_Saliente
+        if hbl.Contador_activado:
             
-        print(str(level)+str(VG.IR2))
+            VG.IR1 = level
+            
+            if VG.contador:
+                if VG.IR2:
+                    if VG.IR1:
+                        if VG.Status == VG.Esperando_IR2:
+                            VG.Status = VG.Esperando_IR1
+                            print("IR1: Vuelvo a Esperar por IR1 ")
+                    else:
+                        if VG.Status == VG.Esperando_IR1:
+                            VG.Status = VG.Esperando_IR2
+                            print("IR1: Esperando IR2")
+                else:
+                    if VG.IR1:
+                        if VG.Status == VG.Esperando_IR1:
+                            VG.Status = VG.Esperando_IR1_IR2
+                            print("IR1: Esperando IR1 IR2")
+                    else:
+                        if VG.Status == VG.Esperando_IR2:
+                            VG.Status = VG.Esperando_IR1
+                            print("IR1: vuelvo a Esperar  por IR1 ")
+                            
+                        elif VG.Status == VG.Esperando_IR1_IR2:
+                            VG.Status = VG.Esperando_Reloj
+                            print("IR1: Vuelvo a esperar por el reloj")
+            else:   #SECUENCIA INTRUSOS / SALIDAS
+                if VG.IR2:
+                    if VG.IR1:
+                        if VG.Status == VG.VerificacionIntruso3:
+                            VG.Status = VG.VerificacionIntruso2
+                            print("IR1: Vuelvo a verificacion 2")
+                        elif VG.Status == VG.Esperando_IR1_IR2_Saliente:
+                            VG.Status = VG.Esperando_IR2
+                            print("IR1: Esperando IR2 Saliente")
+                        
+                    else:
+                        if VG.Status == VG.VerificacionIntruso2:
+                            print("IR1: veri intruso 3")
+                            VG.Status = VG.VerificacionIntruso3
+                        if VG.Status == VG.Esperando_IR2:
+                            VG.Status = VG.Esperando_IR1_IR2_Saliente
+                            print("IR1: Vuelvo a Esperarar por IR1 IR2 Saliente")
+                        
+                else:
+                    if VG.IR1 and VG.Status == VG.Esperando_Reloj:
+                        print("IR1: Verificacion Intruso 1")
+                        VG.Status = VG.VerificacionIntruso
+                    else:
+                        if VG.Status == VG.VerificacionIntruso:
+                            print("Vuelvo a Esperar Por el Reloj")
+                            VG.Status = VG.Esperando_Reloj
+                        if VG.Status == VG.Esperando_IR1_Saliente:
+                            print("Salida Confirmada")
+                            VG.Status = VG.Persona_Saliente
+                
+            print(str(level)+str(VG.IR2))
         if diff > hbl.DIG_in_pushDelay:
-            pass
-            #log.escribeSeparador(hbl.LOGS_hblEntradas)
-            #log.escribeLineaLog(hbl.LOGS_hblEntradas, "IR1") 
+            VG.Contador_Entrada1 += 1
+            log.escribeSeparador(hbl.LOGS_hblEntradas)
+            log.escribeLineaLog(hbl.LOGS_hblEntradas, str(VG.Contador_Entrada1)) 
            
             
             
@@ -202,63 +205,64 @@ class Entradas(object):
         VG.pressTick = tick
         VG.IR2 = level
         
-        if VG.contador:
-            if VG.IR2:
-                if VG.IR1:
-                    if VG.Status == VG.Esperando_IR1_IR2:
-                        VG.Status = VG.Esperando_IR1
-                        print("IR2: Esperando IR1")
-                      
-                else:
-                    pass
-            else:
-                if VG.IR1:
-                    if VG.Status == VG.Esperando_IR1:
-                        VG.Status = VG.Esperando_IR1_IR2
-                        print("IR2: vuelvo a Esperar por IR1 IR2")
-                    
+        if hbl.Contador_activado:
+            if VG.contador:
+                if VG.IR2:
+                    if VG.IR1:
+                        if VG.Status == VG.Esperando_IR1_IR2:
+                            VG.Status = VG.Esperando_IR1
+                            print("IR2: Esperando IR1")
                         
+                    else:
+                        pass
                 else:
-                    if VG.Status == VG.Esperando_IR2:
-                        VG.Status = VG.EntradaCompleta
-                        print("Entrada Valida")
+                    if VG.IR1:
+                        if VG.Status == VG.Esperando_IR1:
+                            VG.Status = VG.Esperando_IR1_IR2
+                            print("IR2: vuelvo a Esperar por IR1 IR2")
+                        
+                            
+                    else:
+                        if VG.Status == VG.Esperando_IR2:
+                            VG.Status = VG.EntradaCompleta
+                            print("Entrada Valida")
+                
             
-        
-        else:  #SECUENCIA INTRUSOS/SALIDAS
-            if VG.IR2:
-                if VG.IR1:
-                    if VG.Status == VG.VerificacionIntruso:
-                        print("IR2: veri intruso 2")
-                        VG.Status = VG.VerificacionIntruso2
-                    elif VG.Status == VG.Esperando_IR1_Saliente:
-                        VG.Status = VG.Esperando_IR2
-                        print("IR2: vuelvo a Esperando IR2 Saliente")  
+            else:  #SECUENCIA INTRUSOS/SALIDAS
+                if VG.IR2:
+                    if VG.IR1:
+                        if VG.Status == VG.VerificacionIntruso:
+                            print("IR2: veri intruso 2")
+                            VG.Status = VG.VerificacionIntruso2
+                        elif VG.Status == VG.Esperando_IR1_Saliente:
+                            VG.Status = VG.Esperando_IR2
+                            print("IR2: vuelvo a Esperando IR2 Saliente")  
+                    else:
+                        if VG.Status == VG.Esperando_Reloj:
+                            VG.Status = VG.Esperando_IR1_IR2_Saliente
+                            print("IR2: esperando IR1 IR2 Saliente")
                 else:
-                    if VG.Status == VG.Esperando_Reloj:
-                        VG.Status = VG.Esperando_IR1_IR2_Saliente
-                        print("IR2: esperando IR1 IR2 Saliente")
-            else:
-                if VG.IR1 and VG.Status == VG.VerificacionIntruso2:
-                    VG.Status = VG.VerificacionIntruso
-                    print("IR2: Vuelvo a verif 1")
-                        
-                else:
-                    if VG.Status == VG.VerificacionIntruso3:
-                        print("IR2: verif Completa")
-                        VG.Status = VG.Intruso
-                    elif VG.Status == VG.Esperando_IR2:
-                        print("IR2 : Esperando IR1 Saliente")
-                        VG.Status = VG.Esperando_IR1_Saliente
-                    elif VG.Status == VG.Esperando_IR1_IR2_Saliente:
-                        print("IR2: Vuelvo a esperar por el reloj")
-                        VG.Status = VG.Esperando_Reloj
-                        
-        print(str(VG.IR1)+str(level))
+                    if VG.IR1 and VG.Status == VG.VerificacionIntruso2:
+                        VG.Status = VG.VerificacionIntruso
+                        print("IR2: Vuelvo a verif 1")
+                            
+                    else:
+                        if VG.Status == VG.VerificacionIntruso3:
+                            print("IR2: verif Completa")
+                            VG.Status = VG.Intruso
+                        elif VG.Status == VG.Esperando_IR2:
+                            print("IR2 : Esperando IR1 Saliente")
+                            VG.Status = VG.Esperando_IR1_Saliente
+                        elif VG.Status == VG.Esperando_IR1_IR2_Saliente:
+                            print("IR2: Vuelvo a esperar por el reloj")
+                            VG.Status = VG.Esperando_Reloj
+                            
+            print(str(VG.IR1)+str(level))
         
         if diff > hbl.DIG_in_pushDelay: 
-            pass
-            #log.escribeSeparador(hbl.LOGS_hblEntradas)
-            #log.escribeLineaLog(hbl.LOGS_hblEntradas, "IR2") 
+            VG.Contador_Entrada2 += 1
+            log.escribeSeparador(hbl.LOGS_hblEntradas)
+            log.escribeLineaLog(hbl.LOGS_hblEntradas, str(VG.Contador_Entrada2)) 
            
 
              
@@ -274,9 +278,9 @@ class Entradas(object):
         VG.pressTick = tick
         
         if diff > hbl.DIG_in_pushDelay:
-            
+            VG.Contador_Entrada3 += 1
             log.escribeSeparador(hbl.LOGS_hblEntradas)
-            log.escribeLineaLog(hbl.LOGS_hblEntradas, "Puerta abierta")
+            log.escribeLineaLog(hbl.LOGS_hblEntradas, str(VG.Contador_Entrada3)) 
            
 
     
@@ -292,8 +296,9 @@ class Entradas(object):
         VG.pressTick = tick
 
         if diff > hbl.DIG_in_pushDelay: 
-            log.escribeSeparador(hbl.LOGS_hblEntradas) 
-            log.escribeLineaLog(hbl.LOGS_hblEntradas, "P2_CERRADO") 
+            VG.Contador_Entrada4 += 1
+            log.escribeSeparador(hbl.LOGS_hblEntradas)
+            log.escribeLineaLog(hbl.LOGS_hblEntradas, str(VG.Contador_Entrada4)) 
 
 
     def callbackIN5(self, gpio, level, tick):  

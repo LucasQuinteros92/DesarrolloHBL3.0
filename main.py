@@ -85,14 +85,16 @@ def receiveSignal(signalNumber, frame):
 -------------------------------------------------------------------------------------------- """
 
 if __name__ == "__main__":
+    
+    # cargar parametros del archivo de configuracion
+    hbl.cargarParametros('hbl.json')
 
     def callback():
         pass
 
     pi = pigpio.pi()
 
-    # cargar parametros del archivo de configuracion
-    hbl.cargarParametros('hbl.json')
+    
 
     # escribe inicializacion HBL
     hblCore.inicializacionHBL()
@@ -105,7 +107,7 @@ if __name__ == "__main__":
     main.Entradas(pi, variablesGlobales.Pin_Entrada1,
                   variablesGlobales.Pin_Entrada2,
                   variablesGlobales.Pin_Entrada3,
-                  variablesGlobales.Pin_W2_WD1)
+                  variablesGlobales.Pin_Entrada4)
 
     # inicializa decoder wiegand
     if hbl.WD_W1_activado == 1:
@@ -170,17 +172,23 @@ if __name__ == "__main__":
     # BioStar2_WebSocket.inicializacion()
 
     websocket = BioStar2_WebSocket.BioStar2_WebSocket()
+    
+    
 
     b = datetime.datetime.now()
     print("HBL READY")
+    funcionamiento.inicializacion_clases()
     # heartbeat hblCore
     while True:
         # hblCore.heartBeat(pi)
 
         a = datetime.datetime.now()
-        funcionamiento.Control(pi)
+        
 
         c = a-b
+        
+        if c.total_seconds() >= 0.5:
+            funcionamiento.Control(pi)
 
         if c.total_seconds() >= 500:
             Monitoreo.Control()

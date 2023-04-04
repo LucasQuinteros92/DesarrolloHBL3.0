@@ -45,21 +45,22 @@ class CamaraRPI(object):
         
         
     def start(self):
-        if hbl.Camara_RPI_activado:
-            if self.flag:
-                self.camera = PiCamera()
-                self.camera.resolution = (hbl.Camara_RPI_Resolucion[0],hbl.Camara_RPI_Resolucion[1])
-                try:
-                    self.camera.start_preview()
-                    time.sleep(2)
-                    
-                    if self.tiempo_captura > 0:
-                        self.Capturar_Video()
-                    else:
-                        self.Capturar_Foto()
-                    self.camera.close()
-                    self.flag = False
-                except Exception as e:
-                    log.escribeSeparador(hbl.LOGS_hblEntradas) 
-                    log.escribeLineaLog(hbl.LOGS_hblEntradas, e) 
-                    self.flag = False
+        while True:
+            if hbl.Camara_RPI_activado:
+                if self.flag:
+                    self.camera = PiCamera()
+                    self.camera.resolution = (hbl.Camara_RPI_Resolucion[0],hbl.Camara_RPI_Resolucion[1])
+                    try:
+                        self.camera.start_preview()
+                        #time.sleep(2)
+                        
+                        if self.tiempo_captura > 0:
+                            self.Capturar_Video()
+                        else:
+                            self.Capturar_Foto()
+                        self.camera.close()
+                        self.flag = False
+                    except Exception as e:
+                        log.escribeSeparador(hbl.LOGS_hblEntradas) 
+                        log.escribeLineaLog(hbl.LOGS_hblEntradas, e) 
+                        self.flag = False

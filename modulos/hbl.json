@@ -36,12 +36,12 @@
             "in1": {
                 "activado": 1,
                 "logica": "NA",
-                "id": "Reloj"
+                "id": "Trigger"
             },
             "in2": {
                 "activado": 1,
                 "logica": "NA",
-                "id": "IR2"
+                "id": "Echo"
             },
             "in3": {
                 "activado": 0,
@@ -335,7 +335,7 @@
         }
     },
     "ContadorPersonas": {
-        "activado": 1,
+        "activado": 0,
         "MaxTimeIN": 10,
         "MaxTimeAlarma": 0.5,
         "MaxTimeBlink": 1,
@@ -358,7 +358,8 @@
         "remitente": "rpi@jphlions.com",
         "user": "lqu@jphlions.com",
         "key": "KLfNzGbp9Zk7HtU3",
-        "subject": "Intruso detectado"
+        "subject": "Intruso detectado",
+        "message": "Se ha detectado un intrusoa a las : "
     },
     "BioStar2_WebSocket": {
         "activado": 1,
@@ -379,6 +380,6 @@
             480
         ],
         "Path_Relativo": "Videos/",
-        "Duracion_Video_seg": 5
+        "Duracion_Video_seg": 0
     }
 }

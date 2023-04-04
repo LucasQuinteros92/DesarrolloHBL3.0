@@ -1,6 +1,7 @@
 import os
 import pigpio 
 import datetime 
+from modulos import hbl as hbl
 
 """ --------------------------------------------------------------------------------------------
 
@@ -144,15 +145,31 @@ NTP_URL = "time.cloudflare.com"
 """       GPIO       """
 
 #pi = pigpio.pi()
+"""     ON/OFF      """
+PIN_ON = 1      
+PIN_OFF = 0
+
+ON = 0
+OFF = 1
 
 
 """       ENTRADAS       """
-
+# Las entradas deberian ser clases donde el numero de pin, el contador serian atributos y un metodo podria ser read y write
 Pin_Entrada1 = 21
 Pin_Entrada2 = 20
 Pin_Entrada3 = 25
 Pin_Entrada4 = 22
 
+
+Contador_Entrada1 = 0
+Contador_Entrada2 = 0
+Contador_Entrada3 = 0
+Contador_Entrada4 = 0
+
+
+
+Input_State = {str(Pin_Entrada1):OFF,str(Pin_Entrada2):OFF,str(Pin_Entrada3):OFF,str(Pin_Entrada4):OFF}
+#Input_State = [(str(Pin_Entrada1),False),(str(Pin_Entrada2),False),(str(Pin_Entrada3),False),(str(Pin_Entrada4),False)]
 
 """       SALIDAS       """
 
@@ -179,12 +196,7 @@ Pin_W2_WD1 = 27
 """     I2C      """
 BusDisplay = 3
 
-"""     ON/OFF      """
-PIN_ON = 1      
-PIN_OFF = 0
 
-ON = 1
-OFF = 0
 
 ############################################################################
 #                                                                          #
