@@ -198,6 +198,7 @@ def cargarParametros(archivo):
     
     global LOGS_hblPuerta
     global LOGS_hblMail
+    global LOGS_hblSensorUltrasonico
 
     global IDHBL
 
@@ -341,6 +342,10 @@ def cargarParametros(archivo):
     global Camara_RPI_Resolucion
     global Camara_RPI_Path_Realativo
     global Camara_RPI_Duracion_Video_seg
+    
+    global sensorUltrasonico_activado
+    global sensorUltrasonico_cantidadMuestras
+    global sensorUltrasonico_distanciaTrigger_cm
     
     global data
 
@@ -600,6 +605,7 @@ def cargarParametros(archivo):
 
     LOGS_hblPuerta = data["logs"]["hblPuerta"]
     LOGS_hblMail   = data["logs"]["hblMail"]
+    LOGS_hblSensorUltrasonico = data["logs"]["hblSensorUltrasonico"]
 
     IDHBL=data["IDHBL"] 
 
@@ -737,18 +743,23 @@ def cargarParametros(archivo):
     Contador_DebugSensores           = data["ContadorPersonas"]["DebugSensores"]
     
     #Mails
-    Mail_activado = data["Mail"]["activado"]
-    Mail_destinatarios = data["Mail"]["destinatarios"]
-    Mail_remitente = data["Mail"]["remitente"]
-    Mail_user = data["Mail"]["user"]
-    Mail_subject = data["Mail"]["subject"]
-    Mail_key = data["Mail"]["key"]
-    Mail_message = data["Mail"]["message"]
+    Mail_activado                   = data["Mail"]["activado"]
+    Mail_destinatarios              = data["Mail"]["destinatarios"]
+    Mail_remitente                  = data["Mail"]["remitente"]
+    Mail_user                       = data["Mail"]["user"]
+    Mail_subject                    = data["Mail"]["subject"]
+    Mail_key                        = data["Mail"]["key"]
+    Mail_message                    = data["Mail"]["message"]
    
     #Camara RPI
-    Camara_RPI_activado = data["Camara_RPI"]["activado"]
-    Camara_RPI_Resolucion = data["Camara_RPI"]["Resolucion"]
-    Camara_RPI_Path_Realativo = data["Camara_RPI"]["Path_Relativo"]
-    Camara_RPI_Duracion_Video_seg  = data["Camara_RPI"]["Duracion_Video_seg"]
+    Camara_RPI_activado             = data["Camara_RPI"]["activado"]
+    Camara_RPI_Resolucion           = data["Camara_RPI"]["Resolucion"]
+    Camara_RPI_Path_Realativo       = data["Camara_RPI"]["Path_Relativo"]
+    Camara_RPI_Duracion_Video_seg   = data["Camara_RPI"]["Duracion_Video_seg"]
+    
+    
+    sensorUltrasonico_activado              = data["sensorUltrasonico"]["activado"]
+    sensorUltrasonico_cantidadMuestras      = data["sensorUltrasonico"]["cantidadMuestras"]
+    sensorUltrasonico_distanciaTrigger_cm   = data["sensorUltrasonico"]["distanciaTrigger_cm"]
 
  

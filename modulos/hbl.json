@@ -4,7 +4,7 @@
         "modo": 9
     },
     "Tareas": {
-        "Tarea1": "Confirmacion Reloj",
+        "Tarea1": "Leer Sensor Ultrasonico",
         "Tarea2": "Filmar Camara RPI",
         "Tarea3": "Enviar Mail",
         "Tarea4": "",
@@ -36,7 +36,7 @@
             "in1": {
                 "activado": 1,
                 "logica": "NA",
-                "id": "Trigger"
+                "id": "Entrada 1"
             },
             "in2": {
                 "activado": 1,
@@ -57,7 +57,7 @@
         "out": {
             "out1": {
                 "activado": 1,
-                "id": "Sirena",
+                "id": "Trigger",
                 "repeticion": 3,
                 "tiempo": 1
             },
@@ -269,7 +269,8 @@
         "hblTimer": "hblTimer.log",
         "hblPuerta": "hblPuerta.log",
         "hblBioStar2_WebSocket": "hblBioStar2_WebSocket.log",
-        "hblMail": "hblMail.log"
+        "hblMail": "hblMail.log",
+        "hblSensorUltrasonico": "hblSensorUltrasonico.log"
     },
     "reporte": {
         "activado": 0,
@@ -381,5 +382,10 @@
         ],
         "Path_Relativo": "Videos/",
         "Duracion_Video_seg": 0
+    },
+    "sensorUltrasonico": {
+        "activado": 1,
+        "cantidadMuestras": 3,
+        "distanciaTrigger_cm": 150
     }
 }

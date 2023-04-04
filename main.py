@@ -86,15 +86,15 @@ def receiveSignal(signalNumber, frame):
 
 if __name__ == "__main__":
     
-    # cargar parametros del archivo de configuracion
-    hbl.cargarParametros('hbl.json')
+    
 
     def callback():
         pass
 
     pi = pigpio.pi()
 
-    
+    # cargar parametros del archivo de configuracion
+    hbl.cargarParametros('hbl.json')
 
     # escribe inicializacion HBL
     hblCore.inicializacionHBL()

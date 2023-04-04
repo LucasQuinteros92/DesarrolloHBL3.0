@@ -1,7 +1,7 @@
 from email.message import EmailMessage
 from threading import Thread
-import modulos.auxiliar as auxiliar
-import modulos.hbl as hbl
+from modulos import auxiliar as auxiliar
+from modulos import hbl as hbl
 import time
 import smtplib
 import datetime

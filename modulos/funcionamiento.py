@@ -1,4 +1,4 @@
-from modulos import PlantillasImpresora, hbl as hbl
+from modulos import hbl as hbl
 from modulos import variablesGlobales as VG
 from modulos import log as log
 from modulos import auxiliar as auxiliar
@@ -29,6 +29,7 @@ flagTeclado = 0
 
 global cCamaraRPI
 global cMail
+global cSensorUltrasonico
 
 
 
@@ -94,10 +95,7 @@ def Tareas(RunTask):
 def TareaFilmarVideo():
     log.escribeSeparador(hbl.LOGS_hblTareas)
     log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Filmar Video") 
-    ##SendMail.SendMail().__run(CamaraRPI.CamaraRPI().CapturarVideo(hbl.Camara_RPI_Duracion_Video_seg))
-    ##SendMail.SendMail().__run(CamaraRPI.CamaraRPI().CapturarVideo(hbl.Camara_RPI_Duracion_Video_seg))
     VG.path_last_capture = cCamaraRPI.Capturar(hbl.Camara_RPI_Duracion_Video_seg)
-    #VG.path_last_capture = CamaraRPI.CamaraRPI().Capturar(hbl.Camara_RPI_Duracion_Video_seg)
     Avanzar_Tarea()
     
 def TareaCapturarFoto():
@@ -114,7 +112,9 @@ def TareaEnviarMail():
 def TareaSensorUltrasonico():
     log.escribeSeparador(hbl.LOGS_hblTareas)
     log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Sensor Ultrasonico") 
-    if sensorUltrasonico.ReadState():
+    #pinECHO,on,off = auxiliar.GetInfoID("Echo","IN")
+    #pinTRIG,rep,tiempo = auxiliar.GetInfoID("Trigger","OUT")
+    if cSensorUltrasonico.ReadState():
         log.escribeLineaLog(hbl.LOGS_hblTareas, "Se detecto obstaculo") 
         Avanzar_Tarea()
 
@@ -343,6 +343,8 @@ def inicializacion_clases():
     cCamaraRPI = CamaraRPI.CamaraRPI()
     global cMail
     cMail= SendMail.SendMail()
+    global cSensorUltrasonico
+    cSensorUltrasonico = sensorUltrasonico.sensorUltrasonico(pinECHO=auxiliar.GetInfoID("Echo","IN")[0],pinTRIG=auxiliar.GetInfoID("Trigger","OUT")[0],nMuestras=hbl.sensorUltrasonico_cantidadMuestras)
     
 def Control(pi2):
     global pi
