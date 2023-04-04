@@ -4,16 +4,14 @@ from modulos import auxiliar as auxiliar
 from modulos import hbl as hbl
 import time
 import smtplib
-import datetime
-from email.mime.image import MIMEImage
-from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email import encoders
+from datetime import datetime
 import imghdr
 from modulos import variablesGlobales as VG
 import os
 from modulos import log as log
+
+
+TIEMPO_ENTRE_CAPTURAS_SEG = 3
 
 class SendMail(object):
 
@@ -31,18 +29,26 @@ class SendMail(object):
         self.msg = ""
         self.asunto = ""
         
+        self.lastMail = datetime.now()
+        
         self.count = 0
         if hbl.Mail_activado == 1:
             self.t = Thread(target = self.__run, daemon= False)
             self.t.start()
 
     def send(self,asunto="",msg="",path=None):
-        
-        self.asunto = asunto
-        self.msg = msg
         #self.count += 1   
-        self.state = True
-        self.path_file = path      
+        now = datetime.now()        
+        if ((now - self.lastMail).total_seconds() > TIEMPO_ENTRE_CAPTURAS_SEG) and path != "Error":
+            self.asunto = asunto
+            self.msg = msg
+            self.state = True
+            self.path_file = path 
+        else:
+            log.escribeSeparador(hbl.LOGS_hblMail)
+            log.escribeLineaLog(hbl.LOGS_hblMail,"Error tiempo entre mails")
+            
+                 
     
     def __run(self):
         if hbl.Mail_activado == 1:
@@ -58,7 +64,7 @@ class SendMail(object):
 
         
                         
-                        date = str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+                        date = str(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
                         self.msg += self.msg + date
                         self.email.set_content(self.msg) 
                         sent_message = f"Asunto: {self.asunto} \nMensaje: {self.msg}"
@@ -80,6 +86,9 @@ class SendMail(object):
                             smtp.login(self.user, self.key)
                             smtp.sendmail(self.remitente, self.destinatario, self.email.as_string())
                             smtp.quit()
+                            
+                            now = datetime.now()
+                            self.lastMail = now  
                             
                             
                             log.escribeSeparador(hbl.LOGS_hblMail)

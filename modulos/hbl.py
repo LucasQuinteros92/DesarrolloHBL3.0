@@ -198,6 +198,7 @@ def cargarParametros(archivo):
     
     global LOGS_hblPuerta
     global LOGS_hblMail
+    global LOGS_hblCamaraRPI
     global LOGS_hblSensorUltrasonico
 
     global IDHBL
@@ -605,6 +606,7 @@ def cargarParametros(archivo):
 
     LOGS_hblPuerta = data["logs"]["hblPuerta"]
     LOGS_hblMail   = data["logs"]["hblMail"]
+    LOGS_hblCamaraRPI = data["logs"]["hblCamaraRPI"]
     LOGS_hblSensorUltrasonico = data["logs"]["hblSensorUltrasonico"]
 
     IDHBL=data["IDHBL"] 

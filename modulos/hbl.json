@@ -270,6 +270,7 @@
         "hblPuerta": "hblPuerta.log",
         "hblBioStar2_WebSocket": "hblBioStar2_WebSocket.log",
         "hblMail": "hblMail.log",
+        "hblCamaraRPI": "hblCamaraRPI.log",
         "hblSensorUltrasonico": "hblSensorUltrasonico.log"
     },
     "reporte": {

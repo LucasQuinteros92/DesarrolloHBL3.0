@@ -14,7 +14,7 @@ Primer_Flanco = datetime.datetime.now()
 
 #Hacer todo como un thread que toma x muestras, las promedia y devuelve resultado
 
-DISTANCE_KEY = 150 #cm
+DISTANCE_KEY = 30 #cm
 TIMEOUT = 8 #segundos
 
 def shift(l, n):
@@ -34,6 +34,7 @@ class sensorUltrasonico(object):
                 # que las muestras sean reales.  n es self.nMuestras
                 self.muestras = [DISTANCE_KEY*2] * self.nMuestras 
                 self.state_obstaculo = False
+                self.lastObstaculo = datetime.datetime.now() - datetime.timedelta(hours=5)
                 self.Flanco_SENPROX = False
                 self.Distance_Prev = False
                 self.before_FlancoOFF = datetime.datetime.now()
@@ -123,6 +124,7 @@ class sensorUltrasonico(object):
             
     
     def ReadState(self):
+        self.lastObstaculo = datetime.datetime.now()
         return self.state_obstaculo
 
     def start(self):

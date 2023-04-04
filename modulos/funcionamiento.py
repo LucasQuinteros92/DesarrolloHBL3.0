@@ -11,6 +11,7 @@ from modulos import Control_Personal as CP
 from modulos import sensorUltrasonico as sensorUltrasonico
 from modulos import SendMail as SendMail
 from modulos import CamaraRPI as CamaraRPI
+from datetime import datetime
 import requests
 import pigpio 
 
@@ -110,13 +111,16 @@ def TareaEnviarMail():
 
 
 def TareaSensorUltrasonico():
-    log.escribeSeparador(hbl.LOGS_hblTareas)
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Sensor Ultrasonico") 
-    #pinECHO,on,off = auxiliar.GetInfoID("Echo","IN")
-    #pinTRIG,rep,tiempo = auxiliar.GetInfoID("Trigger","OUT")
-    if cSensorUltrasonico.ReadState():
-        log.escribeLineaLog(hbl.LOGS_hblTareas, "Se detecto obstaculo") 
-        Avanzar_Tarea()
+    now = datetime.now()
+    #log.escribeSeparador(hbl.LOGS_hblTareas)
+    #log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Sensor Ultrasonico") 
+    if (now - cSensorUltrasonico.lastObstaculo).total_seconds() > 15:
+        
+        
+        if cSensorUltrasonico.ReadState():
+            log.escribeLineaLog(hbl.LOGS_hblTareas, "Se detecto obstaculo") 
+            Avanzar_Tarea()
+        
 
 
 
