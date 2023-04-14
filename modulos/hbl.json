@@ -387,6 +387,6 @@
     "sensorUltrasonico": {
         "activado": 1,
         "cantidadMuestras": 3,
-        "distanciaTrigger_cm": 150
+        "distanciaTrigger_cm": 50
     }
 }

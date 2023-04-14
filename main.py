@@ -54,6 +54,7 @@ from modulos.encoderWiegand import Encoder
 from modulos.salidas import Salidas
 from modulos.entradas import Entradas
 from modulos import variablesGlobales as variablesGlobales
+from modulos import moduloTest1 as moduloTest1
 
 global pi
 
