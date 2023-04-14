@@ -48,6 +48,7 @@ from modulos.encoderWiegand import Encoder
 from modulos.salidas import Salidas
 from modulos.entradas import Entradas
 from modulos import variablesGlobales as variablesGlobales
+from modulos import moduloTest1 as moduloTest1
 
 global pi
 
@@ -173,7 +174,7 @@ if __name__ == "__main__":
 
     websocket = BioStar2_WebSocket.BioStar2_WebSocket()
     
-    
+    moduloTest1()
 
     b = datetime.datetime.now()
     print("HBL READY")

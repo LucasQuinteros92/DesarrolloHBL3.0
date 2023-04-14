@@ -14,7 +14,6 @@ Primer_Flanco = datetime.datetime.now()
 
 #Hacer todo como un thread que toma x muestras, las promedia y devuelve resultado
 
-DISTANCE_KEY = 30 #cm
 TIMEOUT = 8 #segundos
 
 def shift(l, n):
@@ -23,16 +22,17 @@ def shift(l, n):
 
 
 class sensorUltrasonico(object):
-    def __init__(self,pinECHO,pinTRIG,nMuestras):
+    def __init__(self,pinECHO,pinTRIG,nMuestras,distTrigger_cm):
         if hbl.sensorUltrasonico_activado:
             try:
                 self.distancia_prom = 0
                 self.pinECHO = pinECHO
                 self.pinTRIG = pinTRIG
                 self.nMuestras = nMuestras
+                self.distTrigger_cm = distTrigger_cm
                 #Lista de n elementos con valores 2 veces mas grandes que el valor de trigger para asegurar que no se dispare hasta 
                 # que las muestras sean reales.  n es self.nMuestras
-                self.muestras = [DISTANCE_KEY*2] * self.nMuestras 
+                self.muestras = [distTrigger_cm*2] * self.nMuestras 
                 self.state_obstaculo = False
                 self.lastObstaculo = datetime.datetime.now() - datetime.timedelta(hours=5)
                 self.Flanco_SENPROX = False
@@ -102,7 +102,7 @@ class sensorUltrasonico(object):
             log.escribeSeparador(hbl.LOGS_hblSensorUltrasonico)
             log.escribeLineaLog(hbl.LOGS_hblSensorUltrasonico, f"Vector de muestras: {str(self.muestras)}\nDistancia medida: {str(distancia)} cm\nDistancia promedio: {str(self.distancia_prom)} cm")
 
-            if self.distancia_prom > DISTANCE_KEY:
+            if self.distancia_prom > self.distTrigger_cm:
                 if self.Flanco_SENPROX == True:
                     self.before_FlancoOFF = datetime.datetime.now() 
                     self.Flanco_SENPROX = False
@@ -124,24 +124,30 @@ class sensorUltrasonico(object):
             
     
     def ReadState(self):
-        self.lastObstaculo = datetime.datetime.now()
+        if self.state_obstaculo:
+            self.lastObstaculo = datetime.datetime.now()
         return self.state_obstaculo
 
+
+
+    def ReadVectorState(self):
+        return all(i <= self.distTrigger_cm for i in self.muestras)
     def start(self):
         while True:
             distancia = self.ReadDistance()
+            self.state_obstaculo = self.ReadVectorState()
             try:
                 if distancia == True and self.Distance_Prev==False:
                     self.Distance_Prev = True
                     log.escribeSeparador(hbl.LOGS_hblEntradas) 
                     log.escribeLineaLog(hbl.LOGS_hblEntradas, "Sensor Prox: ON") 
-                    self.state_obstaculo = True
+                    #self.state_obstaculo = True
 
                 if distancia == False and self.Distance_Prev==True:
                     self.Distance_Prev = False
                     log.escribeSeparador(hbl.LOGS_hblEntradas) 
                     log.escribeLineaLog(hbl.LOGS_hblEntradas, "Sensor Prox: OFF")
-                    self.state_obstaculo = False
+                    #self.state_obstaculo = False
 
             except Exception as inst:  
                 log.escribeLineaLog(hbl.LOGS_hblEntradas, "ERROR SENSOR: " + str(inst) + "\n") 

@@ -348,7 +348,7 @@ def inicializacion_clases():
     global cMail
     cMail= SendMail.SendMail()
     global cSensorUltrasonico
-    cSensorUltrasonico = sensorUltrasonico.sensorUltrasonico(pinECHO=auxiliar.GetInfoID("Echo","IN")[0],pinTRIG=auxiliar.GetInfoID("Trigger","OUT")[0],nMuestras=hbl.sensorUltrasonico_cantidadMuestras)
+    cSensorUltrasonico = sensorUltrasonico.sensorUltrasonico(pinECHO=auxiliar.GetInfoID("Echo","IN")[0],pinTRIG=auxiliar.GetInfoID("Trigger","OUT")[0],nMuestras=hbl.sensorUltrasonico_cantidadMuestras,distTrigger_cm=hbl.sensorUltrasonico_distanciaTrigger_cm)
     
 def Control(pi2):
     global pi
