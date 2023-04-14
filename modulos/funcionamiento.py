@@ -45,22 +45,13 @@ def Tareas(RunTask):
     global DNI_data_serial
     global WordTeclado
     global pi
+    
     if RunTask == "Leer Serial":
-        if VG.Serial_COM1_Rx_Data != "":
-            VG.LastID = TareaLeerSerial(VG.Serial_COM1_Rx_Data)
-            VG.Serial_COM1_Rx_Data = ""
-        if VG.Serial_COM2_Rx_Data != "":
-            VG.LastID = TareaLeerSerial(VG.Serial_COM2_Rx_Data)
-            VG.Serial_COM2_Rx_Data = ""
+        TareaLeerSerial()
     if RunTask == "Enviar Wiegand":
         TareaEnviarWD(VG.LastID,pi)
     if RunTask == "Leer Wiegand":
-        if VG.WD1_Data != "":
-            VG.LastID = TareaLeerWD(VG.WD1_Data ,1)
-            VG.WD1_Data = ""
-        if VG.WD2_Data != "":
-            VG.LastID = TareaLeerWD(VG.WD2_Data ,2)
-            VG.WD2_Data = ""
+        TareaLeerWD()
     if RunTask == "Request":
         TareaRequest()
     if RunTask == "Confirmacion Reloj":
@@ -143,12 +134,24 @@ def TareaActualizarFichadasPendiente():
     Avanzar_Tarea()
     
 
-def TareaLeerSerial(data):
-    log.escribeSeparador(hbl.LOGS_hblTareas)
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Serial") 
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "Datos Serial recibidos : " + str(data)) 
+def TareaLeerSerial():
+    
+    if VG.Serial_COM1_Rx_Data != "" or VG.Serial_COM2_Rx_Data != "":
+        log.escribeSeparador(hbl.LOGS_hblTareas)
+        log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Serial") 
+        if VG.Serial_COM1_Rx_Data != "":
+            VG.LastID = VG.Serial_COM1_Rx_Data
+            VG.Serial_COM1_Rx_Data = ""
+             
+        if VG.Serial_COM2_Rx_Data != "":
+            VG.LastID = VG.Serial_COM2_Rx_Data
+            VG.Serial_COM2_Rx_Data = ""
+            
+        log.escribeLineaLog(hbl.LOGS_hblTareas, "Datos Serial recibidos : " + str(VG.LastID))
+    
+    
     Avanzar_Tarea()    ##Esto solo deberia estar cuando se finalice esta tarea
-    return str(data)
+    return 
 
 
 def TareaEnviarWD(data,pi):
@@ -214,14 +217,23 @@ def TareaRequest():
         Avanzar_Tarea()
 
 
-def TareaLeerWD(id,WD_number):
-    flag_data=0
-    log.escribeSeparador(hbl.LOGS_hblTareas)
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Wiegand") 
+def TareaLeerWD():
+    
+    
+    if VG.WD1_Data != "" or VG.WD2_Data != "":
+            log.escribeSeparador(hbl.LOGS_hblTareas)
+            log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Wiegand") 
+            if VG.WD1_Data != "":
+                    VG.LastID = VG.WD1_Data
+                    log.escribeLineaLog(hbl.LOGS_hblTareas, "ID WD1  = " + str(VG.WD1_Data)) 
+                    VG.WD1_Data = "" 
+            if VG.WD2_Data != "":
+                    VG.LastID = VG.WD2_Data
+                    log.escribeLineaLog(hbl.LOGS_hblTareas, "ID WD2  = " + str(VG.WD2_Data)) 
+                    VG.WD2_Data = ""
 
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "ID WD" + str(WD_number) + " = " + str(id)) 
     Avanzar_Tarea()
-    return id
+    return 
 
 
 def TareaConfirmacionReloj():
