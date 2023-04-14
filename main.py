@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 """ --------------------------------------------------------------------------------------------
 
     _   _ ____  _     
@@ -19,6 +20,8 @@ import pigpio
 import signal
 import time
 import datetime
+
+
 
 import main
 from modulos import delays as delays
@@ -43,6 +46,8 @@ from modulos import SendMail
 from modulos import BioStar2_WebSocket
 from modulos import CamaraRPI
 
+from modulos import *
+
 from modulos.decoderWiegand import Decoder
 from modulos.encoderWiegand import Encoder
 from modulos.salidas import Salidas
@@ -62,6 +67,7 @@ global pi
 def receiveSignal(signalNumber, frame):
     print("Signal received: ", signalNumber)
     print("Cleaning ...")
+    
     hidDevice.threadCount()
     try:
         w1.cancel()                         # cancela el callback de wiegand
@@ -93,6 +99,7 @@ if __name__ == "__main__":
 
     pi = pigpio.pi()
 
+    
     # cargar parametros del archivo de configuracion
     hbl.cargarParametros('hbl.json')
 

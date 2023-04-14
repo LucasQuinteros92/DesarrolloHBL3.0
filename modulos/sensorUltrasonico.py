@@ -5,6 +5,7 @@ from modulos import variablesGlobales as variablesGlobales
 from modulos import log as log
 from modulos import hbl as hbl
 from modulos import auxiliar as auxiliar
+from modulos import variablesGlobales as variablesGlobales
 import RPi.GPIO as GPIO
 import time
 
@@ -100,7 +101,10 @@ class sensorUltrasonico(object):
             
             # Imprimimos resultado
             log.escribeSeparador(hbl.LOGS_hblSensorUltrasonico)
-            log.escribeLineaLog(hbl.LOGS_hblSensorUltrasonico, f"Vector de muestras: {str(self.muestras)}\nDistancia medida: {str(distancia)} cm\nDistancia promedio: {str(self.distancia_prom)} cm")
+            log.escribeLineaLog(hbl.LOGS_hblSensorUltrasonico,
+                                f"Vector de muestras: {str(self.muestras)}\n        \
+                                Distancia medida: {str(distancia)} cm\n             \
+                                Distancia promedio: {str(self.distancia_prom)} cm") 
 
             if self.distancia_prom > DISTANCE_KEY:
                 if self.Flanco_SENPROX == True:
