@@ -45,6 +45,7 @@ from modulos import Control_Personal as CP
 from modulos import SendMail
 from modulos import BioStar2_WebSocket
 from modulos import CamaraRPI
+from modulos import moduloPrueba
 
 from modulos import *
 
@@ -181,7 +182,7 @@ if __name__ == "__main__":
     websocket = BioStar2_WebSocket.BioStar2_WebSocket()
     
     
-
+    moduloPrueba.ModuloPrueba()
     b = datetime.datetime.now()
     print("HBL READY")
     funcionamiento.inicializacion_clases()
