@@ -184,6 +184,8 @@ if __name__ == "__main__":
     
     
     moduloPrueba.ModuloPrueba()
+    moduloTest1()
+
     b = datetime.datetime.now()
     print("HBL READY")
     funcionamiento.inicializacion_clases()
