@@ -370,3 +370,9 @@ Send to topic JPH/Tx/CONTADOR/: { "ID"  : "PWC  Acceso Castelli",               
 [97;1m***********************************************************************************[0m
 [97;1mFecha / Hora : 2023/06/16 15:16:50[0m
 Send to topic JPH/Tx/CONTADOR/: { "ID"  : "PWC  Acceso Castelli",                                            "Entrantes"  :"1",                                               "Salientes" : "0",                                             "RED":"SECTOR1",                                                 "HORA":"16/06/2023 15:16:50"}
+[97;1m***********************************************************************************[0m
+[97;1mFecha / Hora : 2023/06/16 15:17:51[0m
+Send to topic JPH/Tx/CONTADOR/: { "ID"  : "PWC  Acceso Castelli",                                            "Entrantes"  :"1",                                               "Salientes" : "0",                                             "RED":"SECTOR1",                                                 "HORA":"16/06/2023 15:17:51"}
+[97;1m***********************************************************************************[0m
+[97;1mFecha / Hora : 2023/06/16 15:18:51[0m
+Send to topic JPH/Tx/CONTADOR/: { "ID"  : "PWC  Acceso Castelli",                                            "Entrantes"  :"1",                                               "Salientes" : "0",                                             "RED":"SECTOR1",                                                 "HORA":"16/06/2023 15:18:51"}
