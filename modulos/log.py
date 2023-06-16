@@ -176,7 +176,7 @@ def escribeLineaLog(log, texto):
  
     except Exception as inst: 
 
-        log.escribeSeparador(hbl.LOGS_hblCore) 
+        escribeSeparador(hbl.LOGS_hblCore) 
         #log.escribeLineaLog(hbl.LOGS_hblCore, "Error : " + str(inst))
         
 """ --------------------------------------------------------------------------------------------
@@ -189,11 +189,11 @@ def escribeLineaLog(log, texto):
 -------------------------------------------------------------------------------------------- """
 
 class LogReport(object):
-    def __init__(self):
+    def __init__(self, name):
         self.__EscribirLinea = False
         
         self.texto = []
-        self.t = Thread(target=self.__run, name="",daemon=False)
+        self.t = Thread(target=self.__run, name=name,daemon=False)
         self.t.start()
         
         self.csi    = '\x1B['
