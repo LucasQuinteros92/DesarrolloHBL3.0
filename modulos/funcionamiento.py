@@ -1,4 +1,4 @@
-from modulos import PlantillasImpresora, hbl as hbl
+from modulos import hbl as hbl
 from modulos import variablesGlobales as VG
 from modulos import log as log
 from modulos import auxiliar as auxiliar
@@ -8,6 +8,10 @@ from modulos import hblCore as hblCore
 from modulos import cacheo as cacheo
 from modulos import PlantillasImpresora
 from modulos import Control_Personal as CP
+from modulos import sensorUltrasonico as sensorUltrasonico
+from modulos import SendMail as SendMail
+from modulos import CamaraRPI as CamaraRPI
+from datetime import datetime
 import requests
 import pigpio 
 
@@ -21,9 +25,18 @@ global pi
 global flagLog
 flagLog = 0
 
-
 global flagTeclado
 flagTeclado = 0
+
+global cCamaraRPI
+global cMail
+global cSensorUltrasonico
+
+
+
+
+def Avanzar_Tarea():
+    VG.NumeroTarea = VG.NumeroTarea + 1
 
 
 
@@ -32,22 +45,13 @@ def Tareas(RunTask):
     global DNI_data_serial
     global WordTeclado
     global pi
+    
     if RunTask == "Leer Serial":
-        if VG.Serial_COM1_Rx_Data != "":
-            VG.LastID = TareaLeerSerial(VG.Serial_COM1_Rx_Data)
-            VG.Serial_COM1_Rx_Data = ""
-        if VG.Serial_COM2_Rx_Data != "":
-            VG.LastID = TareaLeerSerial(VG.Serial_COM2_Rx_Data)
-            VG.Serial_COM2_Rx_Data = ""
+        TareaLeerSerial()
     if RunTask == "Enviar Wiegand":
         TareaEnviarWD(VG.LastID,pi)
     if RunTask == "Leer Wiegand":
-        if VG.WD1_Data != "":
-            VG.LastID = TareaLeerWD(VG.WD1_Data ,1)
-            VG.WD1_Data = ""
-        if VG.WD2_Data != "":
-            VG.LastID = TareaLeerWD(VG.WD2_Data ,2)
-            VG.WD2_Data = ""
+        TareaLeerWD()
     if RunTask == "Request":
         TareaRequest()
     if RunTask == "Confirmacion Reloj":
@@ -65,18 +69,60 @@ def Tareas(RunTask):
     if RunTask == "ActualizarFichadasPendiente":
         TareaActualizarFichadasPendiente()
     if RunTask == "Leer Websocket":
-        
-            TareaLeerWebSock()
+        TareaLeerWebSock()
+    if RunTask == "Leer Sensor Ultrasonico":
+        TareaSensorUltrasonico()
+    if RunTask == "Filmar Camara RPI":
+        TareaFilmarVideo()
+    if RunTask == "Capturar Foto Camara RPI":
+        TareaCapturarFoto()
+    if RunTask == "Enviar Mail":
+        TareaEnviarMail()
             
     if RunTask == "":
-        VG.NumeroTarea = VG.NumeroTarea + 1
+        Avanzar_Tarea()
+
+
+
+def TareaFilmarVideo():
+    log.escribeSeparador(hbl.LOGS_hblTareas)
+    log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Filmar Video") 
+    VG.path_last_capture = cCamaraRPI.Capturar(hbl.Camara_RPI_Duracion_Video_seg)
+    Avanzar_Tarea()
+    
+def TareaCapturarFoto():
+    pass
+
+def TareaEnviarMail():
+    log.escribeSeparador(hbl.LOGS_hblTareas)
+    log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Enviar Mail") 
+    cMail.send(asunto=hbl.Mail_subject,msg=hbl.Mail_message,path=VG.path_last_capture)
+    Avanzar_Tarea()
+    
+
+
+def TareaSensorUltrasonico():
+    now = datetime.now()
+    #log.escribeSeparador(hbl.LOGS_hblTareas)
+    #log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Sensor Ultrasonico") 
+    if (now - cSensorUltrasonico.lastObstaculo).total_seconds() > 15:
+        
+        
+        if cSensorUltrasonico.ReadState():
+            log.escribeLineaLog(hbl.LOGS_hblTareas, "Se detecto obstaculo") 
+            Avanzar_Tarea()
+        
+
+
+
+
         
 def TareaLeerWebSock():
     if VG.WebSock_Data != "":
         VG.LastID = VG.WebSock_Data
         VG.WebSock_Data = ""
         
-        VG.NumeroTarea = VG.NumeroTarea+1
+        Avanzar_Tarea()
 
 def TareaActualizarFichadasPendiente():
     if VG.LastDNI != VG.LastID:
@@ -86,15 +132,27 @@ def TareaActualizarFichadasPendiente():
                         #NO SE MODIFICA LA VARIABLE DE LA CLASE, HAY QUE REFERIRSE
                         #A VG.CONTADOR DENTRO DE LA MAQ DE ESTADO
                     
-    VG.NumeroTarea = VG.NumeroTarea+1
+    Avanzar_Tarea()
     
 
-def TareaLeerSerial(data):
-    log.escribeSeparador(hbl.LOGS_hblTareas)
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Serial") 
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "Datos Serial recibidos : " + str(data)) 
-    VG.NumeroTarea = VG.NumeroTarea+1    ##Esto solo deberia estar cuando se finalice esta tarea
-    return str(data)
+def TareaLeerSerial():
+    
+    if VG.Serial_COM1_Rx_Data != "" or VG.Serial_COM2_Rx_Data != "":
+        log.escribeSeparador(hbl.LOGS_hblTareas)
+        log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Serial") 
+        if VG.Serial_COM1_Rx_Data != "":
+            VG.LastID = VG.Serial_COM1_Rx_Data
+            VG.Serial_COM1_Rx_Data = ""
+             
+        if VG.Serial_COM2_Rx_Data != "":
+            VG.LastID = VG.Serial_COM2_Rx_Data
+            VG.Serial_COM2_Rx_Data = ""
+            
+        log.escribeLineaLog(hbl.LOGS_hblTareas, "Datos Serial recibidos : " + str(VG.LastID))
+    
+    
+    Avanzar_Tarea()    ##Esto solo deberia estar cuando se finalice esta tarea
+    return 
 
 
 def TareaEnviarWD(data,pi):
@@ -131,7 +189,7 @@ def TareaEnviarWD(data,pi):
         log.escribeSeparador(hbl.LOGS_hblTareas)
         log.escribeLineaLog(hbl.LOGS_hblTareas, "ERROR : Ninugno de los dos WD estan activados y/o en modo salida") 
 
-    VG.NumeroTarea = VG.NumeroTarea + 1
+    Avanzar_Tarea()
 
 
 def TareaRequest():
@@ -153,21 +211,30 @@ def TareaRequest():
 
         req = requests.get(UrlCompletaReq, timeout=int(hbl.REQ_timeoutRequest))
         log.escribeLineaLog(hbl.LOGS_hblTareas, "Respuesta Request: " + req)
-        VG.NumeroTarea = VG.NumeroTarea + 1
+        Avanzar_Tarea()
 
     except Exception as e:
         log.escribeLineaLog(hbl.LOGS_hblTareas, "ERROR Request: ")
-        VG.NumeroTarea = VG.NumeroTarea + 1
+        Avanzar_Tarea()
 
 
-def TareaLeerWD(id,WD_number):
-    flag_data=0
-    log.escribeSeparador(hbl.LOGS_hblTareas)
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Wiegand") 
+def TareaLeerWD():
+    
+    
+    if VG.WD1_Data != "" or VG.WD2_Data != "":
+            log.escribeSeparador(hbl.LOGS_hblTareas)
+            log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Leer Wiegand") 
+            if VG.WD1_Data != "":
+                    VG.LastID = VG.WD1_Data
+                    log.escribeLineaLog(hbl.LOGS_hblTareas, "ID WD1  = " + str(VG.WD1_Data)) 
+                    VG.WD1_Data = "" 
+            if VG.WD2_Data != "":
+                    VG.LastID = VG.WD2_Data
+                    log.escribeLineaLog(hbl.LOGS_hblTareas, "ID WD2  = " + str(VG.WD2_Data)) 
+                    VG.WD2_Data = ""
 
-    log.escribeLineaLog(hbl.LOGS_hblTareas, "ID WD" + str(WD_number) + " = " + str(id)) 
-    VG.NumeroTarea = VG.NumeroTarea + 1
-    return id
+    Avanzar_Tarea()
+    return 
 
 
 def TareaConfirmacionReloj():
@@ -182,10 +249,11 @@ def TareaConfirmacionReloj():
         log.escribeLineaLog(hbl.LOGS_hblTareas, "ERROR : PIN INVALIDO") 
         VG.NumeroTarea = 1
     else:
-        data = pi.read(pin)
-        if data == on:
+        VG.Contador_Entrada1
+        if VG.Contador_Entrada1 > 0:
             log.escribeLineaLog(hbl.LOGS_hblTareas, "Confirmacion de Reloj Recibida") 
-            VG.NumeroTarea = VG.NumeroTarea + 1
+            VG.Contador_Entrada1 = 0
+            Avanzar_Tarea()
             flagLog = 0
 
 
@@ -195,7 +263,7 @@ def TareaGenerarTXT(id):
     myFile = open(hbl.TXT_path, 'w')
     with myFile:
         myFile.write("ID = " + str(id))
-    VG.NumeroTarea = VG.NumeroTarea + 1
+    Avanzar_Tarea()
 
 
 def TareaCacheo():
@@ -212,7 +280,7 @@ def TareaCacheo():
         log.escribeLineaLog(hbl.LOGS_hblTareas, "Resultado Cacheo : NEGATIVO") 
     
 
-    VG.NumeroTarea = VG.NumeroTarea + 1
+    Avanzar_Tarea()
         
 
 def TareaAbrirBarrera():
@@ -250,7 +318,7 @@ def TareaAbrirBarrera():
         if hbl.Audio_activado:
             auxiliar.PlayAudio(hbl.Audio_path_Pasa,pi)
 
-    VG.NumeroTarea = VG.NumeroTarea + 1
+    Avanzar_Tarea()
 
 
 """La tarea teclado usb tiene que checkear en el JSON si el LCD esta activado. De ser asi, tiene que cada vez que recibe un digito, mandarlo a una funcion 'LCD' que se va a encargar
@@ -272,7 +340,7 @@ def TareaLeerTecladoUSB():
             VG.LastID = int(WordTeclado)
             WordTeclado = ""
             flagTeclado = 0
-            VG.NumeroTarea += 1
+            Avanzar_Tarea()
         log.escribeLineaLog(hbl.LOGS_hblTareas, "Palabra Teclado : " + WordTeclado)
         VG.CharTeclado = ""
 
@@ -284,8 +352,17 @@ def TareaImprimir():
     log.escribeSeparador(hbl.LOGS_hblTareas)
     log.escribeLineaLog(hbl.LOGS_hblTareas, "Tarea : Imprimir")
     PlantillasImpresora.ImpresionTest()
-    VG.NumeroTarea += 1
-
+    Avanzar_Tarea()
+    
+    
+def inicializacion_clases():
+    global cCamaraRPI 
+    cCamaraRPI = CamaraRPI.CamaraRPI()
+    global cMail
+    cMail= SendMail.SendMail()
+    global cSensorUltrasonico
+    cSensorUltrasonico = sensorUltrasonico.sensorUltrasonico(pinECHO=auxiliar.GetInfoID("Echo","IN")[0],pinTRIG=auxiliar.GetInfoID("Trigger","OUT")[0],nMuestras=hbl.sensorUltrasonico_cantidadMuestras,distTrigger_cm=hbl.sensorUltrasonico_distanciaTrigger_cm)
+    
 def Control(pi2):
     global pi
     pi = pi2

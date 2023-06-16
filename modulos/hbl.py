@@ -10,187 +10,15 @@ import sys
 
 
 -------------------------------------------------------------------------------------------- """
-   
-def cargarParametros(archivo):
-
-    global ID_HBL
- 
-    global REPORTE_idNitro4       
-    global REPORTE_lastUpdate 
-    global REPORTE_tiempoUpdate 
-    global REPORTE_activado 
-    global REPORTE_timeOutRequest 
-    global REPORTE_encodeAutorization
-    global REPORTE_URLToken 
-    global REPORTE_URLChequeoConfiguracion 
-    global REPORTE_URLReporteInicial 
-    global REPORTE_URLReporte
-
-
-    global TAREAS_Tarea1
-    global TAREAS_Tarea2
-    global TAREAS_Tarea3
-    global TAREAS_Tarea4
-    global TAREAS_Tarea5
-    global TAREAS_Tarea6
-    global TAREAS_Tarea7
-    global TAREAS_Tarea8
-    global TAREAS_Tarea9
-    global TAREAS_Tarea10
-    global TareasJSON
-    global CantidadTareas
-
-    global WD_W1_activado
-    global WD_W1_modo
-    global WD_W1_esperaSenial
-    global WD_W1_bits
-    global WD_W1_delayPulso
-    global WD_W1_delayIntervalo
-    global WD_W1_primerBit 
-
-    global WD_W2_activado
-    global WD_W2_modo
-    global WD_W2_esperaSenial
-    global WD_W2_bitsSalida
-    global WD_W2_delayPulso
-    global WD_W2_delayIntervalo
-    global WD_W2_primerBit 
-     
-
-
-    global DIG_in_pushDelay
-
-    global DIG_in_in1_activado
-    global DIG_in_in1_logica
-    global DIG_in_in1_id
-    global DIG_in_in1_ON
-    global DIG_in_in1_OFF
-
-    global DIG_in_in2_activado
-    global DIG_in_in2_logica
-    global DIG_in_in2_id
-    global DIG_in_in2_ON
-    global DIG_in_in2_OFF
-
-    global DIG_in_in3_activado
-    global DIG_in_in3_logica
-    global DIG_in_in3_id
-    global DIG_in_in3_ON
-    global DIG_in_in3_OFF
-
-    global DIG_in_in4_activado
-    global DIG_in_in4_logica
-    global DIG_in_in4_id
-    global DIG_in_in4_ON
-    global DIG_in_in4_OFF
-  
-    global DIG_out_out1_activado 
-    global DIG_out_out1_id 
-    global DIG_out_out1_repeticion 
-    global DIG_out_out1_tiempo
-
-    global DIG_out_out2_activado 
-    global DIG_out_out2_id 
-    global DIG_out_out2_repeticion 
-    global DIG_out_out2_tiempo
-
-    global DIG_out_out3_activado 
-    global DIG_out_out3_id
-    global DIG_out_out3_repeticion  
-    global DIG_out_out3_tiempo
-
-    global DIG_out_out4_activado 
-    global DIG_out_out4_id 
-    global DIG_out_out4_repeticion
-    global DIG_out_out4_tiempo
-
-    global ON
-    global OFF
-
-    global SERIAL_COM1_activado
-    global SERIAL_COM1_port
-    global SERIAL_COM1_baudrate
-    global SERIAL_COM1_bytesize
-    global SERIAL_COM1_parity
-    global SERIAL_COM1_stopbits 
-
-    global SERIAL_COM2_activado
-    global SERIAL_COM2_port
-    global SERIAL_COM2_baudrate
-    global SERIAL_COM2_bytesize
-    global SERIAL_COM2_parity
-    global SERIAL_COM2_stopbits
- 
-    global HID_device1_activado
-    global HID_device1_bufferSize 
-    global HID_device1_timeout
-    global HID_device1_endpoint 
-    global HID_device1_vendor_ID
-    global HID_device1_product_ID
-
-    global HID_device2_activado 
-    global HID_device2_bufferSize 
-    global HID_device2_timeout
-    global HID_device2_endpoint 
-    global HID_device2_vendor_ID
-    global HID_device2_product_ID
-
-    global HID_device3_activado 
-    global HID_device3_bufferSize 
-    global HID_device3_timeout
-    global HID_device3_endpoint
-    global HID_device3_vendor_ID
-    global HID_device3_product_ID
-
-    global HID_device4_activado 
-    global HID_device4_bufferSize 
-    global HID_device4_timeout
-    global HID_device4_endpoint
-    global HID_device4_vendor_ID
-    global HID_device4_product_ID
-
-    global TCP_serverDefault_ip 
-    global TCP_serverDefault_port 
-    global TCP_serverDefault_activado 
-    global TCP_serverDefault_intentosConexion 
-
-    global HTTP_server_activado
-    global HTTP_server_port
-    global HTTP_server_respuesta
-
-    global FUNC_modo
- 
-    global REQ_activado
-    global REQ_seleccionURL
-    global REQ_urlRequest1
-    global REQ_urlRequest2
-    global REQ_urlRequest3
-    global REQ_urlRequest4
-    global REQ_urlRequest5
-    global REQ_urlError
-    global REQ_timeoutRequest
-    global REQ_timerActivado 
-
-    global TXT_activado
-    global TXT_path
-
-    global LOGS_pathBackup 
-    global LOGS_tamanioRotator 
-    global LOGS_hblCore  
-    global LOGS_hblConexiones
-    global LOGS_hblWiegand
-    global LOGS_hblTcp
-    global LOGS_hblEntradas
-    global LOGS_hblHTTP
-    global LOGS_hblReporte
-    global LOGS_hblhidDevice
-    global LOGS_hbli2c
-    global LOGS_FTP
-    global LOGS_hblSerial
-    global LOGS_hblCacheo
-    global LOGS_hblKiosco
-    global LOGS_hblTareas
+class cargarParametros(object):
+    def __init__(self ,  archivo):
+        # ******************************************************************************************************************************************
+        
+        
+        # variable para guardar que pantalla esta activa
+        self.pantallaOled = 1
     
+<<<<<<< HEAD
     global LOGS_hblBioStar2_WebSocket
     global LOGS_hblEsclusa
     global LOGS_hblMQTT
@@ -345,260 +173,213 @@ def cargarParametros(archivo):
     
     global data
 
+=======
+>>>>>>> 1bc0f66ad3e87c37389319b87841ad86ddfeacdc
 
+        # ******************************************************************************************************************************************
+        #   Inicio de la carga de datos en las variables
+        # ******************************************************************************************************************************************
 
-    # ******************************************************************************************************************************************
+        # path del archivo
+        __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__))) 
     
 
-    # variable para guardar que pantalla esta activa
-    global pantallaOled
+        # Leo los parametros de configuracion en el JSON
+        with open(os.path.join(__location__ , archivo), "r") as f:
+            data = json.load(f)
 
-    pantallaOled = 1
-  
 
-    # ******************************************************************************************************************************************
-    #   Inicio de la carga de datos en las variables
-    # ******************************************************************************************************************************************
+        
+        
+        self.ID_HBL = data["IDHBL"]
+        self.IDHBL  = data["IDHBL"]
+        
+        # reporte
+        self.REPORTE_idNitro4=data["reporte"]["idNitro4"]       
+        self.REPORTE_lastUpdate=data["reporte"]["lastUpdate"]  
+        self.REPORTE_tiempoUpdate=data["reporte"]["tiempoUpdate"]
+        self.REPORTE_activado=data["reporte"]["activado"]   
+        self.REPORTE_timeOutRequest=data["reporte"]["timeOutRequest"]  
+        self.REPORTE_encodeAutorization=data["reporte"]["encodeAutorization"]
+        self.REPORTE_URLToken=data["reporte"]["URLToken"]
+        self.REPORTE_URLChequeoConfiguracion=data["reporte"]["URLChequeoConfiguracion"] 
+        self.REPORTE_URLReporteInicial=data["reporte"]["URLReporteInicial"]
+        self.REPORTE_URLReporte=data["reporte"]["URLReporte"]
 
-    # path del archivo
-    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__))) 
- 
 
-    # Leo los parametros de configuracion en el JSON
-    with open(os.path.join(__location__ , archivo), "r") as f:
-        data = json.load(f)
+        
+
+        self.TAREAS_Tarea1=data['Tareas']['Tarea1']
+        self.TAREAS_Tarea2=data['Tareas']['Tarea2']
+        self.TAREAS_Tarea3=data['Tareas']['Tarea3']
+        self.TAREAS_Tarea4=data['Tareas']['Tarea4']
+        self.TAREAS_Tarea5=data['Tareas']['Tarea5']
+        self.TAREAS_Tarea6=data['Tareas']['Tarea6']
+        self.TAREAS_Tarea7=data['Tareas']['Tarea7']
+        self.TAREAS_Tarea8=data['Tareas']['Tarea8']
+        self.TAREAS_Tarea9=data['Tareas']['Tarea9']
+        self.TAREAS_Tarea10=data['Tareas']['Tarea10']
+
+        self.TareasJSON = data['Tareas']
+        self.CantidadTareas = 0
+
+        for key in self.TareasJSON:
+            if self.TareasJSON[key] != "":
+                self.CantidadTareas = self.CantidadTareas + 1
+
+        #  Seleccion de funcionamiento hbl
+        #
+        #   0  :  repetidor wiegand IN : W1 -> OUT : W2
+        #   1  :  funcionamiento supeditado al request - IN : W1 -> OUT : W2
+        #   2  :  decodificador wiegand W1 - TCP
+        #   3  :  decodificador wiegand W1 - decodificador wiegand W2
+        #   4  :  hidDevice Teclado - Display LCD - TCP
+        #   5  :  lector DNI HID -> wiegand 34
+        #   6  :  decodificador wiegand W1 -> envio ID con request a URL (test lector Tags RFID)
+        #   7  :  conexion TCP con minipc para envio de datos del teclado
+        #   8  :  lectura serial de lector de dni 2D -> envio wiegand 34 al reloj
+        #   9  :  decodificador wiegand W1 -> envio ID a dato.json
+        self.FUNC_modo=data["funcionamiento"]["modo"]  
+        
+        # wiegand
+        self.WD_W1_activado=data["wiegand"]["W1"]["activado"]
+        self.WD_W1_modo=data["wiegand"]["W1"]["modo"]
+        self.WD_W1_esperaSenial=data["wiegand"]["W1"]["esperaSenial"]
+        self.WD_W1_bits=data["wiegand"]["W1"]["bitsSalida"]
+        self.WD_W1_delayPulso=data["wiegand"]["W1"]["delayPulso"]
+        self.WD_W1_delayIntervalo=data["wiegand"]["W1"]["delayIntervalo"]
+        self.WD_W1_primerBit=data["wiegand"]["W1"]["primerBit"]
+
+        self.WD_W2_activado=data["wiegand"]["W2"]["activado"]
+        self.WD_W2_modo=data["wiegand"]["W2"]["modo"]
+        self.WD_W2_esperaSenial=data["wiegand"]["W2"]["esperaSenial"]
+        self.WD_W2_bitsSalida=data["wiegand"]["W2"]["bitsSalida"]
+        self.WD_W2_delayPulso=data["wiegand"]["W2"]["delayPulso"]
+        self.WD_W2_delayIntervalo=data["wiegand"]["W2"]["delayIntervalo"]
+        self.WD_W2_primerBit=data["wiegand"]["W2"]["primerBit"]
+
+
+    
+        # digital
+        self.DIG_in_pushDelay=data["digital"]["in"]["pushDelay"] 
+        self.DIG_in_in1_activado=data["digital"]["in"]["in1"]["activado"]
+        self.DIG_in_in1_logica=data["digital"]["in"]["in1"]["logica"]
+        self.DIG_in_in1_id=data["digital"]["in"]["in1"]["id"]    
+
+        self.DIG_in_in2_activado=data["digital"]["in"]["in2"]["activado"]
+        self.DIG_in_in2_logica=data["digital"]["in"]["in2"]["logica"]
+        self.DIG_in_in2_id=data["digital"]["in"]["in2"]["id"]
+        
+        self.DIG_in_in3_activado=data["digital"]["in"]["in3"]["activado"]
+        self.DIG_in_in3_logica=data["digital"]["in"]["in3"]["logica"]
+        self.DIG_in_in3_id=data["digital"]["in"]["in3"]["id"]
+
+        self.DIG_in_in4_activado=data["digital"]["in"]["in4"]["activado"]
+        self.DIG_in_in4_logica=data["digital"]["in"]["in4"]["logica"]
+        self.DIG_in_in4_id=data["digital"]["in"]["in4"]["id"]
+
+        if self.DIG_in_in1_logica == "NA":
+            self.DIG_in_in1_ON = 0
+            self.DIG_in_in1_OFF = 1
+        if self.DIG_in_in2_logica == "NA":
+            self.DIG_in_in2_ON = 0
+            self.DIG_in_in2_OFF = 1
+        if self.DIG_in_in3_logica == "NA":
+            self.DIG_in_in3_ON = 0
+            self.DIG_in_in3_OFF = 1
+        if self.DIG_in_in4_logica == "NA":
+            self.DIG_in_in4_ON = 0
+            self.DIG_in_in4_OFF = 1
+
+
+
+
 
 
 
     
-    ID_HBL = data["IDHBL"]
-  
-    # reporte
-    REPORTE_idNitro4=data["reporte"]["idNitro4"]       
-    REPORTE_lastUpdate=data["reporte"]["lastUpdate"]  
-    REPORTE_tiempoUpdate=data["reporte"]["tiempoUpdate"]
-    REPORTE_activado=data["reporte"]["activado"]   
-    REPORTE_timeOutRequest=data["reporte"]["timeOutRequest"]  
-    REPORTE_encodeAutorization=data["reporte"]["encodeAutorization"]
-    REPORTE_URLToken=data["reporte"]["URLToken"]
-    REPORTE_URLChequeoConfiguracion=data["reporte"]["URLChequeoConfiguracion"] 
-    REPORTE_URLReporteInicial=data["reporte"]["URLReporteInicial"]
-    REPORTE_URLReporte=data["reporte"]["URLReporte"]
+        self.DIG_out_out1_activado=data["digital"]["out"]["out1"]["activado"]
+        self.DIG_out_out1_id=data["digital"]["out"]["out1"]["id"]
+        self.DIG_out_out1_repeticion=data["digital"]["out"]["out1"]["repeticion"]
+        self.DIG_out_out1_tiempo=data["digital"]["out"]["out1"]["tiempo"]
 
+        self.DIG_out_out2_activado=data["digital"]["out"]["out2"]["activado"]
+        self.DIG_out_out2_id=data["digital"]["out"]["out2"]["id"]
+        self.DIG_out_out2_repeticion=data["digital"]["out"]["out2"]["repeticion"]
+        self.DIG_out_out2_tiempo=data["digital"]["out"]["out2"]["tiempo"]
 
+        self.DIG_out_out3_activado=data["digital"]["out"]["out3"]["activado"]
+        self.DIG_out_out3_id=data["digital"]["out"]["out3"]["id"]
+        self.DIG_out_out3_repeticion=data["digital"]["out"]["out3"]["repeticion"]
+        self.DIG_out_out3_tiempo=data["digital"]["out"]["out3"]["tiempo"]
 
+        self.DIG_out_out4_activado=data["digital"]["out"]["out4"]["activado"]
+        self.DIG_out_out4_id=data["digital"]["out"]["out4"]["id"]
+        self.DIG_out_out4_repeticion=data["digital"]["out"]["out4"]["repeticion"]
+        self.DIG_out_out4_tiempo=data["digital"]["out"]["out4"]["tiempo"]
+        
+        # define la logica si es inversa o directa
 
-    TAREAS_Tarea1=data['Tareas']['Tarea1']
-    TAREAS_Tarea2=data['Tareas']['Tarea2']
-    TAREAS_Tarea3=data['Tareas']['Tarea3']
-    TAREAS_Tarea4=data['Tareas']['Tarea4']
-    TAREAS_Tarea5=data['Tareas']['Tarea5']
-    TAREAS_Tarea6=data['Tareas']['Tarea6']
-    TAREAS_Tarea7=data['Tareas']['Tarea7']
-    TAREAS_Tarea8=data['Tareas']['Tarea8']
-    TAREAS_Tarea9=data['Tareas']['Tarea9']
-    TAREAS_Tarea10=data['Tareas']['Tarea10']
+        ON = 0
+        OFF = 1
 
-    TareasJSON = data['Tareas']
-    CantidadTareas = 0
+        
+        # serial
+        self.SERIAL_COM1_activado=data["serial"]["COM1"]["activado"]
+        self.SERIAL_COM1_port=data["serial"]["COM1"]["port"]
+        self.SERIAL_COM1_baudrate=data["serial"]["COM1"]["baudrate"]
+        self.SERIAL_COM1_bytesize=data["serial"]["COM1"]["bytesize"]
+        self.SERIAL_COM1_parity=data["serial"]["COM1"]["parity"]
+        self.SERIAL_COM1_stopbits=data["serial"]["COM1"]["stopbits"] 
 
-    for key in TareasJSON:
-        if TareasJSON[key] != "":
-            CantidadTareas = CantidadTareas + 1
+        self.SERIAL_COM2_activado=data["serial"]["COM2"]["activado"]
+        self.SERIAL_COM2_port=data["serial"]["COM2"]["port"]
+        self.SERIAL_COM2_baudrate=data["serial"]["COM2"]["baudrate"]
+        self.SERIAL_COM2_bytesize=data["serial"]["COM2"]["bytesize"]
+        self.SERIAL_COM2_parity=data["serial"]["COM2"]["parity"]
+        self.SERIAL_COM2_stopbits=data["serial"]["COM2"]["stopbits"]   
 
-    #  Seleccion de funcionamiento hbl
-    #
-    #   0  :  repetidor wiegand IN : W1 -> OUT : W2
-    #   1  :  funcionamiento supeditado al request - IN : W1 -> OUT : W2
-    #   2  :  decodificador wiegand W1 - TCP
-    #   3  :  decodificador wiegand W1 - decodificador wiegand W2
-    #   4  :  hidDevice Teclado - Display LCD - TCP
-    #   5  :  lector DNI HID -> wiegand 34
-    #   6  :  decodificador wiegand W1 -> envio ID con request a URL (test lector Tags RFID)
-    #   7  :  conexion TCP con minipc para envio de datos del teclado
-    #   8  :  lectura serial de lector de dni 2D -> envio wiegand 34 al reloj
-    #   9  :  decodificador wiegand W1 -> envio ID a dato.json
-    FUNC_modo=data["funcionamiento"]["modo"]  
-    
-    # wiegand
-    WD_W1_activado=data["wiegand"]["W1"]["activado"]
-    WD_W1_modo=data["wiegand"]["W1"]["modo"]
-    WD_W1_esperaSenial=data["wiegand"]["W1"]["esperaSenial"]
-    WD_W1_bits=data["wiegand"]["W1"]["bitsSalida"]
-    WD_W1_delayPulso=data["wiegand"]["W1"]["delayPulso"]
-    WD_W1_delayIntervalo=data["wiegand"]["W1"]["delayIntervalo"]
-    WD_W1_primerBit=data["wiegand"]["W1"]["primerBit"]
+        # hidDevices   
+        self.HID_device1_activado=data["hidDevices"]["device1"]["activado"]
+        self.HID_device1_bufferSize=data["hidDevices"]["device1"]["bufferSize"]
+        self.HID_device1_timeout=data["hidDevices"]["device1"]["timeout"]
+        self.HID_device1_endpoint=data["hidDevices"]["device1"]["endpoint"]
+        self.HID_device1_vendor_ID=data["hidDevices"]["device1"]["vendor_ID"]
+        self.HID_device1_product_ID=data["hidDevices"]["device1"]["product_ID"]
 
-    WD_W2_activado=data["wiegand"]["W2"]["activado"]
-    WD_W2_modo=data["wiegand"]["W2"]["modo"]
-    WD_W2_esperaSenial=data["wiegand"]["W2"]["esperaSenial"]
-    WD_W2_bitsSalida=data["wiegand"]["W2"]["bitsSalida"]
-    WD_W2_delayPulso=data["wiegand"]["W2"]["delayPulso"]
-    WD_W2_delayIntervalo=data["wiegand"]["W2"]["delayIntervalo"]
-    WD_W2_primerBit=data["wiegand"]["W2"]["primerBit"]
+        self.HID_device2_activado=data["hidDevices"]["device2"]["activado"]
+        self.HID_device2_bufferSize=data["hidDevices"]["device2"]["bufferSize"]
+        self.HID_device2_timeout=data["hidDevices"]["device2"]["timeout"]
+        self.HID_device2_endpoint=data["hidDevices"]["device2"]["endpoint"]
+        self.HID_device2_vendor_ID=data["hidDevices"]["device2"]["vendor_IDself."]
+        self.HID_device2_product_ID=data["hidDevices"]["device2"]["product_self.ID"]
 
+        self.HID_device3_activado=data["hidDevices"]["device3"]["activado"]
+        self.HID_device3_bufferSize=data["hidDevices"]["device3"]["bufferSize"]
+        self.HID_device3_timeout=data["hidDevices"]["device3"]["timeout"]
+        self.HID_device3_endpoint=data["hidDevices"]["device3"]["endpoint"]
+        self.HID_device3_vendor_ID=data["hidDevices"]["device3"]["vendor_ID"]
+        self.HID_device3_product_ID=data["hidDevices"]["device3"]["product_ID"]
 
-  
-    # digital
-    DIG_in_pushDelay=data["digital"]["in"]["pushDelay"] 
-    DIG_in_in1_activado=data["digital"]["in"]["in1"]["activado"]
-    DIG_in_in1_logica=data["digital"]["in"]["in1"]["logica"]
-    DIG_in_in1_id=data["digital"]["in"]["in1"]["id"]    
+        self.HID_device4_activado=data["hidDevices"]["device4"]["activado"]
+        self.HID_device4_bufferSize=data["hidDevices"]["device4"]["bufferSize"]
+        self.HID_device4_timeout=data["hidDevices"]["device4"]["timeout"]
+        self.HID_device4_endpoint=data["hidDevices"]["device4"]["endpoint"]
+        self.HID_device4_vendor_ID=data["hidDevices"]["device4"]["vendor_ID"]
+        self.HID_device4_product_ID=data["hidDevices"]["device4"]["product_ID"]
 
-    DIG_in_in2_activado=data["digital"]["in"]["in2"]["activado"]
-    DIG_in_in2_logica=data["digital"]["in"]["in2"]["logica"]
-    DIG_in_in2_id=data["digital"]["in"]["in2"]["id"]
-    
-    DIG_in_in3_activado=data["digital"]["in"]["in3"]["activado"]
-    DIG_in_in3_logica=data["digital"]["in"]["in3"]["logica"]
-    DIG_in_in3_id=data["digital"]["in"]["in3"]["id"]
+        # tcp 
+        self.TCP_serverDefault_ip=data["tcp"]["serverDefault"]["ip"]
+        self.TCP_serverDefault_port=data["tcp"]["serverDefault"]["port"]
+        self.TCP_serverDefault_activado=data["tcp"]["serverDefault"]["activado"]
+        self.TCP_serverDefault_intentosConexion=data["tcp"]["serverDefault"]["intentosConexion"] 
 
-    DIG_in_in4_activado=data["digital"]["in"]["in4"]["activado"]
-    DIG_in_in4_logica=data["digital"]["in"]["in4"]["logica"]
-    DIG_in_in4_id=data["digital"]["in"]["in4"]["id"]
+        # http
+        self.HTTP_server_activado=data["http"]["server"]["activado"]
+        self.HTTP_server_port=data["http"]["server"]["port"]
+        self.HTTP_server_respuesta=data["http"]["server"]["respuesta"] 
 
-    if DIG_in_in1_logica == "NA":
-        DIG_in_in1_ON = 0
-        DIG_in_in1_OFF = 1
-    if DIG_in_in2_logica == "NA":
-        DIG_in_in2_ON = 0
-        DIG_in_in2_OFF = 1
-    if DIG_in_in3_logica == "NA":
-        DIG_in_in3_ON = 0
-        DIG_in_in3_OFF = 1
-    if DIG_in_in4_logica == "NA":
-        DIG_in_in4_ON = 0
-        DIG_in_in4_OFF = 1
-
-
-
-
-
-
-
- 
-    DIG_out_out1_activado=data["digital"]["out"]["out1"]["activado"]
-    DIG_out_out1_id=data["digital"]["out"]["out1"]["id"]
-    DIG_out_out1_repeticion=data["digital"]["out"]["out1"]["repeticion"]
-    DIG_out_out1_tiempo=data["digital"]["out"]["out1"]["tiempo"]
-
-    DIG_out_out2_activado=data["digital"]["out"]["out2"]["activado"]
-    DIG_out_out2_id=data["digital"]["out"]["out2"]["id"]
-    DIG_out_out2_repeticion=data["digital"]["out"]["out2"]["repeticion"]
-    DIG_out_out2_tiempo=data["digital"]["out"]["out2"]["tiempo"]
-
-    DIG_out_out3_activado=data["digital"]["out"]["out3"]["activado"]
-    DIG_out_out3_id=data["digital"]["out"]["out3"]["id"]
-    DIG_out_out3_repeticion=data["digital"]["out"]["out3"]["repeticion"]
-    DIG_out_out3_tiempo=data["digital"]["out"]["out3"]["tiempo"]
-
-    DIG_out_out4_activado=data["digital"]["out"]["out4"]["activado"]
-    DIG_out_out4_id=data["digital"]["out"]["out4"]["id"]
-    DIG_out_out4_repeticion=data["digital"]["out"]["out4"]["repeticion"]
-    DIG_out_out4_tiempo=data["digital"]["out"]["out4"]["tiempo"]
-    
-    # define la logica si es inversa o directa
-
-    ON = 0
-    OFF = 1
-
-    
-    # serial
-    SERIAL_COM1_activado=data["serial"]["COM1"]["activado"]
-    SERIAL_COM1_port=data["serial"]["COM1"]["port"]
-    SERIAL_COM1_baudrate=data["serial"]["COM1"]["baudrate"]
-    SERIAL_COM1_bytesize=data["serial"]["COM1"]["bytesize"]
-    SERIAL_COM1_parity=data["serial"]["COM1"]["parity"]
-    SERIAL_COM1_stopbits=data["serial"]["COM1"]["stopbits"] 
-
-    SERIAL_COM2_activado=data["serial"]["COM2"]["activado"]
-    SERIAL_COM2_port=data["serial"]["COM2"]["port"]
-    SERIAL_COM2_baudrate=data["serial"]["COM2"]["baudrate"]
-    SERIAL_COM2_bytesize=data["serial"]["COM2"]["bytesize"]
-    SERIAL_COM2_parity=data["serial"]["COM2"]["parity"]
-    SERIAL_COM2_stopbits=data["serial"]["COM2"]["stopbits"]   
-
-    # hidDevices   
-    HID_device1_activado=data["hidDevices"]["device1"]["activado"]
-    HID_device1_bufferSize=data["hidDevices"]["device1"]["bufferSize"]
-    HID_device1_timeout=data["hidDevices"]["device1"]["timeout"]
-    HID_device1_endpoint=data["hidDevices"]["device1"]["endpoint"]
-    HID_device1_vendor_ID=data["hidDevices"]["device1"]["vendor_ID"]
-    HID_device1_product_ID=data["hidDevices"]["device1"]["product_ID"]
-
-    HID_device2_activado=data["hidDevices"]["device2"]["activado"]
-    HID_device2_bufferSize=data["hidDevices"]["device2"]["bufferSize"]
-    HID_device2_timeout=data["hidDevices"]["device2"]["timeout"]
-    HID_device2_endpoint=data["hidDevices"]["device2"]["endpoint"]
-    HID_device2_vendor_ID=data["hidDevices"]["device2"]["vendor_ID"]
-    HID_device2_product_ID=data["hidDevices"]["device2"]["product_ID"]
-
-    HID_device3_activado=data["hidDevices"]["device3"]["activado"]
-    HID_device3_bufferSize=data["hidDevices"]["device3"]["bufferSize"]
-    HID_device3_timeout=data["hidDevices"]["device3"]["timeout"]
-    HID_device3_endpoint=data["hidDevices"]["device3"]["endpoint"]
-    HID_device3_vendor_ID=data["hidDevices"]["device3"]["vendor_ID"]
-    HID_device3_product_ID=data["hidDevices"]["device3"]["product_ID"]
-
-    HID_device4_activado=data["hidDevices"]["device4"]["activado"]
-    HID_device4_bufferSize=data["hidDevices"]["device4"]["bufferSize"]
-    HID_device4_timeout=data["hidDevices"]["device4"]["timeout"]
-    HID_device4_endpoint=data["hidDevices"]["device4"]["endpoint"]
-    HID_device4_vendor_ID=data["hidDevices"]["device4"]["vendor_ID"]
-    HID_device4_product_ID=data["hidDevices"]["device4"]["product_ID"]
-
-    # tcp 
-    TCP_serverDefault_ip=data["tcp"]["serverDefault"]["ip"]
-    TCP_serverDefault_port=data["tcp"]["serverDefault"]["port"]
-    TCP_serverDefault_activado=data["tcp"]["serverDefault"]["activado"]
-    TCP_serverDefault_intentosConexion=data["tcp"]["serverDefault"]["intentosConexion"] 
-
-    # http
-    HTTP_server_activado=data["http"]["server"]["activado"]
-    HTTP_server_port=data["http"]["server"]["port"]
-    HTTP_server_respuesta=data["http"]["server"]["respuesta"] 
-
-  
-    # request
-    REQ_activado=data["request"]["activado"]
-    REQ_seleccionURL=data["request"]["seleccionURL"] 
-    REQ_urlRequest1=data["request"]["urlRequest1"] 
-    REQ_urlRequest2=data["request"]["urlRequest2"] 
-    REQ_urlRequest3=data["request"]["urlRequest3"] 
-    REQ_urlRequest4=data["request"]["urlRequest4"] 
-    REQ_urlRequest5=data["request"]["urlRequest5"] 
-
-    REQ_urlError=data["request"]["urlError"] 
-    REQ_timeoutRequest=data["request"]["timeoutRequest"] 
-    REQ_timerActivado=data["request"]["timerActivado"]
-
-
-    TXT_activado=data["GenerarTXT"]["activado"]
-    TXT_path=data["GenerarTXT"]["path"]
-
-    # log   
-    LOGS_pathBackup=data["logs"]["pathBackup"] 
-    LOGS_tamanioRotator=data["logs"]["tamanioRotator"] 
-    LOGS_hblCore=data["logs"]["hblCore"]  
-    LOGS_hblConexiones=data["logs"]["hblConexiones"] 
-    LOGS_hblWiegand=data["logs"]["hblWiegand"] 
-    LOGS_hblTcp=data["logs"]["hblTcp"] 
-    LOGS_hblEntradas=data["logs"]["hblEntradas"] 
-    LOGS_hblHTTP=data["logs"]["hblHTTP"]  
-    LOGS_hblReporte=data["logs"]["hblReporte"]  
-    LOGS_hblhidDevice=data["logs"]["hblhidDevice"]  
-    LOGS_hbli2c=data["logs"]["hbli2c"] 
-    LOGS_FTP=data["logs"]["hblFTP"] 
-    LOGS_hblSerial=data["logs"]["hblSerial"]   
-    LOGS_hblCacheo=data["logs"]["hblCacheo"]    
-    LOGS_hblKiosco=data["logs"]["hblKiosco"]    
-    LOGS_hblTareas=data["logs"]["hblTareas"]
-    LOGS_hblBioStar2_WebSocket=data["logs"]["hblBioStar2_WebSocket"]
-    
-    LOGS_hblEsclusa = data["logs"]["hblEsclusa"]
-    LOGS_hblMQTT = data["logs"]["hblMQTT"]
-    LOGS_hblTimer = data["logs"]["hblTimer"]
-
+<<<<<<< HEAD
     LOGS_hblPuerta = data["logs"]["hblPuerta"]
     LOGS_hblMail   = data["logs"]["hblMail"]
 
@@ -613,109 +394,127 @@ def cargarParametros(archivo):
     DISPLAY_Internet           =  data["display"]["internet"]["activado"]
     DISPLAY_Internet_fila      =  data["display"]["internet"]["fila"]
     DISPLAY_Internet_columna   =  data["display"]["internet"]["columna"] 
+=======
+>>>>>>> 1bc0f66ad3e87c37389319b87841ad86ddfeacdc
     
-    # network
-    NETWORK_activado=data["network"]["activado"]
+        # request
+        self.REQ_activado=data["request"]["activado"]
+        self.REQ_seleccionURL=data["request"]["seleccionURL"] 
+        self.REQ_urlRequest1=data["request"]["urlRequest1"] 
+        self.REQ_urlRequest2=data["request"]["urlRequest2"] 
+        self.REQ_urlRequest3=data["request"]["urlRequest3"] 
+        self.REQ_urlRequest4=data["request"]["urlRequest4"] 
+        self.REQ_urlRequest5=data["request"]["urlRequest5"] 
 
-    NETWORK_eth0_activado=data["network"]["eth0"]["activado"]
-    NETWORK_eth0_dhcp=data["network"]["eth0"]["dhcp"]
-    NETWORK_eth0_static_ip_address=data["network"]["eth0"]["static_ip_address"]
-    NETWORK_eth0_static_routers=data["network"]["eth0"]["static_routers"]
-    NETWORK_eth0_gateway=data["network"]["eth0"]["gateway"]
-    NETWORK_eth0_DNS=data["network"]["eth0"]["DNS"]
-    NETWORK_eth0_netmask=data["network"]["eth0"]["netmask"]
-    NETWORK_eth0_network=data["network"]["eth0"]["network"]
-    NETWORK_eth0_broadcast=data["network"]["eth0"]["broadcast"]  
-    NETWORK_eth0_metric=data["network"]["eth0"]["metric"]
-
-    NETWORK_eth1_activado=data["network"]["eth1"]["activado"]
-    NETWORK_eth1_dhcp=data["network"]["eth1"]["dhcp"]
-    NETWORK_eth1_static_ip_address=data["network"]["eth1"]["static_ip_address"]
-    NETWORK_eth1_static_routers=data["network"]["eth1"]["static_routers"]
-    NETWORK_eth1_gateway=data["network"]["eth1"]["gateway"]
-    NETWORK_eth1_DNS=data["network"]["eth1"]["DNS"]
-    NETWORK_eth1_netmask=data["network"]["eth1"]["netmask"]
-    NETWORK_eth1_network=data["network"]["eth1"]["network"]
-    NETWORK_eth1_broadcast=data["network"]["eth1"]["broadcast"]  
-    NETWORK_eth1_metric=data["network"]["eth1"]["metric"]
-    NETWORK_eth1_vendor_ID=data["network"]["eth1"]["vendor_ID"]  
-    NETWORK_eth1_product_ID=data["network"]["eth1"]["product_ID"] 
-    NETWORK_eth1_timeDelay=data["network"]["eth1"]["timeDelay"] 
-
-    NETWORK_wlan0_activado=data["network"]["wlan0"]["activado"]
-    NETWORK_wlan0_dhcp=data["network"]["wlan0"]["dhcp"]
-    NETWORK_wlan0_static_ip_address=data["network"]["wlan0"]["static_ip_address"]
-    NETWORK_wlan0_static_routers=data["network"]["wlan0"]["static_routers"]
-    NETWORK_wlan0_gateway=data["network"]["wlan0"]["gateway"]
-    NETWORK_wlan0_DNS=data["network"]["wlan0"]["DNS"]
-    NETWORK_wlan0_netmask=data["network"]["wlan0"]["netmask"]
-    NETWORK_wlan0_network=data["network"]["wlan0"]["network"]
-    NETWORK_wlan0_broadcast=data["network"]["wlan0"]["broadcast"] 
-    NETWORK_wlan0_metric=data["network"]["wlan0"]["metric"]
-    NETWORK_wlan0_ssid=data["network"]["wlan0"]["ssid"]
-    NETWORK_wlan0_password=data["network"]["wlan0"]["password"] 
-
-    NETWORK_ppp0_activado=data["network"]["ppp0"]["activado"]
-    NETWORK_ppp0_vendor_ID=data["network"]["ppp0"]["vendor_ID"]
-    NETWORK_ppp0_product_ID=data["network"]["ppp0"]["product_ID"]  
-    NETWORK_ppp0_dialcommand=data["network"]["ppp0"]["dialcommand"]
-    NETWORK_ppp0_init1=data["network"]["ppp0"]["init1"]
-    NETWORK_ppp0_init2=data["network"]["ppp0"]["init2"]
-    NETWORK_ppp0_init3=data["network"]["ppp0"]["init3"]
-    NETWORK_ppp0_init4=data["network"]["ppp0"]["init4"]
-    NETWORK_ppp0_stupidmode=data["network"]["ppp0"]["stupidmode"]
-    NETWORK_ppp0_ISDN=data["network"]["ppp0"]["ISDN"]
-    NETWORK_ppp0_modemType=data["network"]["ppp0"]["modemType"]
-    NETWORK_ppp0_askPassword=data["network"]["ppp0"]["askPassword"]
-    NETWORK_ppp0_phone=data["network"]["ppp0"]["phone"] 
-    NETWORK_ppp0_username=data["network"]["ppp0"]["username"]
-    NETWORK_ppp0_password=data["network"]["ppp0"]["password"]
-    NETWORK_ppp0_baud=data["network"]["ppp0"]["baud"]
-    NETWORK_ppp0_newPPPD=data["network"]["ppp0"]["newPPPD"]
-    NETWORK_ppp0_carrierCheck=data["network"]["ppp0"]["carrierCheck"]
-    NETWORK_ppp0_autoReconnect=data["network"]["ppp0"]["autoReconnect"] 
-    NETWORK_ppp0_dialAttempts=data["network"]["ppp0"]["dialAttempts"] 
-    NETWORK_ppp0_metric=data["network"]["ppp0"]["metric"] 
- 
-    NETWORK_testConexion_activado=data["network"]["testConexion"]["activado"] 
-    NETWORK_testConexion_url=data["network"]["testConexion"]["url"] 
-    NETWORK_testConexion_timeoutUrl=data["network"]["testConexion"]["timeoutUrl"] 
-    NETWORK_testConexion_timeDelay=data["network"]["testConexion"]["timeDelay"] 
-    NETWORK_testConexion_timeRepeat=data["network"]["testConexion"]["timeRepeat"] 
-    NETWORK_testConexion_intentosConexion=data["network"]["testConexion"]["intentosConexion"] 
-    NETWORK_testConexion_resetActivado=data["network"]["testConexion"]["resetActivado"]   
-
-    FTP_activado=data["ftp"]["activado"] 
-    FTP_server=data["ftp"]["server"] 
-    FTP_user=data["ftp"]["user"] 
-    FTP_pass=data["ftp"]["pass"]     
-
-    CACHEO_activado=data["cacheo"]["activado"] 
-    CACHEO_cantidadCacheos=data["cacheo"]["cantidadCacheos"]
-    CACHEO_cacheosPositivos=data["cacheo"]["cacheosPositivos"]
-    CACHEO_tiempoRelePositivo=data["cacheo"]["tiempoRelePositivo"]
-    CACHEO_repRelePositivo=data["cacheo"]["repRelePositivo"]
-    CACHEO_tiempoReleNegativo=data["cacheo"]["tiempoReleNegativo"]
-    CACHEO_repReleNegativo=data["cacheo"]["repReleNegativo"]
+        self.REQ_urlError=data["request"]["urlError"] 
+        self.REQ_timeoutRequest=data["request"]["timeoutRequest"] 
+        self.REQ_timerActivado=data["request"]["timerActivado"]
 
 
-    KIOSCO_activado=data["kiosco"]["activado"]
-    KIOSCO_URL=data["kiosco"]["URL"]
-    KIOSCO_width=data["kiosco"]["width"]
-    KIOSCO_height=data["kiosco"]["height"]
+        self.TXT_activado=data["GenerarTXT"]["activado"]
+        self.TXT_path=data["GenerarTXT"]["path"]
+
+        # log   
+        self.LOGS_pathBackup=data["logs"]["pathBackup"] 
+        self.LOGS_tamanioRotator=data["logs"]["tamanioRotator"] 
+        self.LOGS_hblCore=data["logs"]["hblCore"]  
+        self.LOGS_hblConexiones=data["logs"]["hblConexiones"] 
+        self.LOGS_hblWiegand=data["logs"]["hblWiegand"] 
+        self.LOGS_hblTcp=data["logs"]["hblTcp"] 
+        self.LOGS_hblEntradas=data["logs"]["hblEntradas"] 
+        self.LOGS_hblHTTP=data["logs"]["hblHTTP"]  
+        self.LOGS_hblReporte=data["logs"]["hblReporte"]  
+        self.LOGS_hblhidDevice=data["logs"]["hblhidDevice"]  
+        self.LOGS_hbli2c=data["logs"]["hbli2c"] 
+        self.LOGS_FTP=data["logs"]["hblFTP"] 
+        self.LOGS_hblSerial=data["logs"]["hblSerial"]   
+        self.LOGS_hblCacheo=data["logs"]["hblCacheo"]    
+        self.LOGS_hblKiosco=data["logs"]["hblKiosco"]    
+        self.LOGS_hblTareas=data["logs"]["hblTareas"]
+        self.LOGS_hblBioStar2_WebSocket=data["logs"]["hblBioStar2_WebSocket"]
+        
+        self.LOGS_hblEsclusa = data["logs"]["hblEsclusa"]
+        self.LOGS_hblMQTT = data["logs"]["hblMQTT"]
+        self.LOGS_hblTimer = data["logs"]["hblTimer"]
+
+        self.LOGS_hblPuerta = data["logs"]["hblPuerta"]
+        self.LOGS_hblMail   = data["logs"]["hblMail"]
+        self.LOGS_hblCamaraRPI = data["logs"]["hblCamaraRPI"]
+        self.LOGS_hblSensorUltrasonico = data["logs"]["hblSensorUltrasonico"]
+
+        
+
+
+        self.DISPLAY_activado  =  data["display"]["activado"]
+        self.DISPLAY_line0     =  data["display"]["line0"]
+        self.DISPLAY_line1     =  data["display"]["line1"]
+        self.DISPLAY_line2     =  data["display"]["line2"]
+        self.DISPLAY_line3     =  data["display"]["line3"]
+        
+        # network
+        self.NETWORK_activado=data["network"]["activado"]
+
+        self.NETWORK_eth0_activado=data["network"]["eth0"]["activado"]
+        self.NETWORK_eth0_dhcp=data["network"]["eth0"]["dhcp"]
+        self.NETWORK_eth0_static_ip_address=data["network"]["eth0"]["static_ip_address"]
+        self.NETWORK_eth0_static_routers=data["network"]["eth0"]["static_routers"]
+        self.NETWORK_eth0_gateway=data["network"]["eth0"]["gateway"]
+        self.NETWORK_eth0_DNS=data["network"]["eth0"]["DNS"]
+        self.NETWORK_eth0_netmask=data["network"]["eth0"]["netmask"]
+        self.NETWORK_eth0_network=data["network"]["eth0"]["network"]
+        self.NETWORK_eth0_broadcast=data["network"]["eth0"]["broadcast"]  
+        self.NETWORK_eth0_metric=data["network"]["eth0"]["metric"]
+
+        self.NETWORK_eth1_activado=data["network"]["eth1"]["activado"]
+        self.NETWORK_eth1_dhcp=data["network"]["eth1"]["dhcp"]
+        self.NETWORK_eth1_static_ip_address=data["network"]["eth1"]["static_ip_address"]
+        self.NETWORK_eth1_static_routers=data["network"]["eth1"]["static_routers"]
+        self.NETWORK_eth1_gateway=data["network"]["eth1"]["gateway"]
+        self.NETWORK_eth1_DNS=data["network"]["eth1"]["DNS"]
+        self.NETWORK_eth1_netmask=data["network"]["eth1"]["netmask"]
+        self.NETWORK_eth1_network=data["network"]["eth1"]["network"]
+        self.NETWORK_eth1_broadcast=data["network"]["eth1"]["broadcast"]  
+        self.NETWORK_eth1_metric=data["network"]["eth1"]["metric"]
+        self.NETWORK_eth1_vendor_ID=data["network"]["eth1"]["vendor_ID"]  
+        self.NETWORK_eth1_product_ID=data["network"]["eth1"]["product_ID"] 
+        self.NETWORK_eth1_timeDelay=data["network"]["eth1"]["timeDelay"] 
+
+        self.NETWORK_wlan0_activado=data["network"]["wlan0"]["activado"]
+        self.NETWORK_wlan0_dhcp=data["network"]["wlan0"]["dhcp"]
+        self.NETWORK_wlan0_static_ip_address=data["network"]["wlan0"]["static_ip_address"]
+        self.NETWORK_wlan0_static_routers=data["network"]["wlan0"]["static_routers"]
+        self.NETWORK_wlan0_gateway=data["network"]["wlan0"]["gateway"]
+        self.NETWORK_wlan0_DNS=data["network"]["wlan0"]["DNS"]
+        self.NETWORK_wlan0_netmask=data["network"]["wlan0"]["netmask"]
+        self.NETWORK_wlan0_network=data["network"]["wlan0"]["network"]
+        self.NETWORK_wlan0_broadcast=data["network"]["wlan0"]["broadcast"] 
+        self.NETWORK_wlan0_metric=data["network"]["wlan0"]["metric"]
+        self.NETWORK_wlan0_ssid=data["network"]["wlan0"]["ssid"]
+        self.NETWORK_wlan0_password=data["network"]["wlan0"]["password"] 
+
+        self.NETWORK_ppp0_activado=data["network"]["ppp0"]["activado"]
+        self.NETWORK_ppp0_vendor_ID=data["network"]["ppp0"]["vendor_ID"]
+        self.NETWORK_ppp0_product_ID=data["network"]["ppp0"]["product_ID"]  
+        self.NETWORK_ppp0_dialcommand=data["network"]["ppp0"]["dialcommand"]
+        self.NETWORK_ppp0_init1=data["network"]["ppp0"]["init1"]
+        self.NETWORK_ppp0_init2=data["network"]["ppp0"]["init2"]
+        self.NETWORK_ppp0_init3=data["network"]["ppp0"]["init3"]
+        self.NETWORK_ppp0_init4=data["network"]["ppp0"]["init4"]
+        self.NETWORK_ppp0_stupidmode=data["network"]["ppp0"]["stupidmode"]
+        self.NETWORK_ppp0_ISDN=data["network"]["ppp0"]["ISDN"]
+        self.NETWORK_ppp0_modemType=data["network"]["ppp0"]["modemType"]
+        self.NETWORK_ppp0_askPassword=data["network"]["ppp0"]["askPassword"]
+        self.NETWORK_ppp0_phone=data["network"]["ppp0"]["phone"] 
+        self.NETWORK_ppp0_username=data["network"]["ppp0"]["username"]
+        self.NETWORK_ppp0_password=data["network"]["ppp0"]["password"]
+        self.NETWORK_ppp0_baud=data["network"]["ppp0"]["baud"]
+        self.NETWORK_ppp0_newPPPD=data["network"]["ppp0"]["newPPPD"]
+        self.NETWORK_ppp0_carrierCheck=data["network"]["ppp0"]["carrierCheck"]
+        self.NETWORK_ppp0_autoReconnect=data["network"]["ppp0"]["autoReconnect"] 
+        self.NETWORK_ppp0_dialAttempts=data["network"]["ppp0"]["dialAttempts"] 
+        self.NETWORK_ppp0_metric=data["network"]["ppp0"]["metric"] 
     
-    MQTT_activado=data["MQTT"]["activado"]
-    MQTT_broker=data["MQTT"]["broker"]
-    MQTT_port=data["MQTT"]["port"]
-    MQTT_TopicSend=data["MQTT"]["TopicSend"]
-    MQTT_TopicRecv=data["MQTT"]["TopicRecv"]
-
-
-    Audio_activado=data["Audio"]["activado"]
-    Audio_path_Pasa=data["Audio"]["path"]["Pasa"]
-    Audio_path_NoPasa=data["Audio"]["path"]["NoPasa"]
-    Audio_path_ErrorDNI=data["Audio"]["path"]["ErrorDNI"]
-    
+<<<<<<< HEAD
     BioStar2_WebSocket_activado=data["BioStar2_WebSocket"]["activado"]
     BioStar2_WebSocket_WebSocket_Host=data["BioStar2_WebSocket"]["WebSocket_Host"]
     BioStar2_WebSocket_Api_Host=data["BioStar2_WebSocket"]["Api_Host"]
@@ -742,14 +541,89 @@ def cargarParametros(archivo):
     Contador_Noreseth1                             = data["ContadorPersonas"]["noreseth1"]
     Contador_Noreseth2                             = data["ContadorPersonas"]["noreseth2"]
     Contador_intentos_conexion                     = data["ContadorPersonas"]["IntentosConexion"]
-    
-    #Mails
-    Mail_activado = data["Mail"]["activado"]
-    Mail_destinatarios = data["Mail"]["destinatarios"]
-    Mail_remitente = data["Mail"]["remitente"]
-    Mail_user = data["Mail"]["user"]
-    Mail_subject = data["Mail"]["subject"]
-    Mail_key = data["Mail"]["key"]
-   
+=======
+        self.NETWORK_testConexion_activado=data["network"]["testConexion"]["activado"] 
+        self.NETWORK_testConexion_url=data["network"]["testConexion"]["url"] 
+        self.NETWORK_testConexion_timeoutUrl=data["network"]["testConexion"]["timeoutUrl"] 
+        self.NETWORK_testConexion_timeDelay=data["network"]["testConexion"]["timeDelay"] 
+        self.NETWORK_testConexion_timeRepeat=data["network"]["testConexion"]["timeRepeat"] 
+        self.NETWORK_testConexion_intentosConexion=data["network"]["testConexion"]["intentosConexion"] 
+        self.NETWORK_testConexion_resetActivado=data["network"]["testConexion"]["resetActivado"]   
 
- 
+        self.FTP_activado=data["ftp"]["activado"] 
+        self.FTP_server=data["ftp"]["server"] 
+        self.FTP_user=data["ftp"]["user"] 
+        self.FTP_pass=data["ftp"]["pass"]     
+
+        self.CACHEO_activado=data["cacheo"]["activado"] 
+        self.CACHEO_cantidadCacheos=data["cacheo"]["cantidadCacheos"]
+        self.CACHEO_cacheosPositivos=data["cacheo"]["cacheosPositivos"]
+        self.CACHEO_tiempoRelePositivo=data["cacheo"]["tiempoRelePositivo"]
+        self.CACHEO_repRelePositivo=data["cacheo"]["repRelePositivo"]
+        self.CACHEO_tiempoReleNegativo=data["cacheo"]["tiempoReleNegativo"]
+        self.CACHEO_repReleNegativo=data["cacheo"]["repReleNegativo"]
+
+
+        self.KIOSCO_activado=data["kiosco"]["activado"]
+        self.KIOSCO_URL=data["kiosco"]["URL"]
+        self.KIOSCO_width=data["kiosco"]["width"]
+        self.KIOSCO_height=data["kiosco"]["height"]
+        
+        self.MQTT_activado=data["MQTT"]["activado"]
+        self.MQTT_broker=data["MQTT"]["broker"]
+        self.MQTT_port=data["MQTT"]["port"]
+        self.MQTT_TopicSend=data["MQTT"]["TopicSend"]
+        self.MQTT_TopicRecv=data["MQTT"]["TopicRecv"]
+
+
+        self.Audio_activado=data["Audio"]["activado"]
+        self.Audio_path_Pasa=data["Audio"]["path"]["Pasa"]
+        self.Audio_path_NoPasa=data["Audio"]["path"]["NoPasa"]
+        self.Audio_path_ErrorDNI=data["Audio"]["path"]["ErrorDNI"]
+        
+        self.BioStar2_WebSocket_activado=data["BioStar2_WebSocket"]["activado"]
+        self.BioStar2_WebSocket_WebSocket_Host=data["BioStar2_WebSocket"]["WebSocket_Host"]
+        self.BioStar2_WebSocket_Api_Host=data["BioStar2_WebSocket"]["Api_Host"]
+        self.BioStar2_WebSocket_Tipo_Evento=data["BioStar2_WebSocket"]["Tipo_Evento"]
+        self.BioStar2_WebSocket_Device_ID=data["BioStar2_WebSocket"]["Device_ID"]
+        self.BioStar2_WebSocket_BioStar2_User=data["BioStar2_WebSocket"]["BioStar2_User"]
+        self.BioStar2_WebSocket_BioStar2_Password=data["BioStar2_WebSocket"]["BioStar2_Password"]
+
+        #CONTADOR DE PERSONAS
+        self.Contador_activado                = data["ContadorPersonas"]["activado"]
+        self.Contador_MaxTimeIN               = data["ContadorPersonas"]["MaxTimeIN"]
+        self.Contador_MaxTimeAlarma           = data["ContadorPersonas"]["MaxTimeAlarma"]
+        self.Contador_MaxTimeBlink            = data["ContadorPersonas"]["MaxTimeBlink"]
+        self.Contador_MaxTimeLEDCicloCompleto = data["ContadorPersonas"]["MaxTimeLEDCicloCompleto"]
+        self.Contador_MaxTimePuerta           = data["ContadorPersonas"]["MaxTimePuerta"]
+        self.Contador_MaxTimeEnable           = data["ContadorPersonas"]["MaxTimeEnable"]
+        self.Contador_MaxTimeDisable          = data["ContadorPersonas"]["MaxTimeDisable"]
+        self.Contador_TiempoBlinkAlarmaPuerta = data["ContadorPersonas"]["TiempoBlinkAlarmaPuerta"]
+        self.Contador_IntrusosPendientesPath  = data["ContadorPersonas"]["IntrusosPendientesPath"]
+        self.Contador_ID                      = data["ContadorPersonas"]["ID"]
+        self.Contador_Buzzer                  = data["ContadorPersonas"]["Buzzer"]
+        self.Contador_MailPuertaAbierta       = data["ContadorPersonas"]["MailPuertaAbierta"]
+        self.Contador_DebugSensores           = data["ContadorPersonas"]["DebugSensores"]
+        
+        #Mails
+        self.Mail_activado                   = data["Mail"]["activado"]
+        self.Mail_destinatarios              = data["Mail"]["destinatarios"]
+        self.Mail_remitente                  = data["Mail"]["remitente"]
+        self.Mail_user                       = data["Mail"]["user"]
+        self.Mail_subject                    = data["Mail"]["subject"]
+        self.Mail_key                        = data["Mail"]["key"]
+        self.Mail_message                    = data["Mail"]["message"]
+>>>>>>> 1bc0f66ad3e87c37389319b87841ad86ddfeacdc
+    
+        #Camara RPI
+        self.Camara_RPI_activado             = data["Camara_RPI"]["activado"]
+        self.Camara_RPI_Resolucion           = data["Camara_RPI"]["Resolucion"]
+        self.Camara_RPI_Path_Realativo       = data["Camara_RPI"]["Path_Relativo"]
+        self.Camara_RPI_Duracion_Video_seg   = data["Camara_RPI"]["Duracion_Video_seg"]
+        
+        
+        self.sensorUltrasonico_activado              = data["sensorUltrasonico"]["activado"]
+        self.sensorUltrasonico_cantidadMuestras      = data["sensorUltrasonico"]["cantidadMuestras"]
+        self.sensorUltrasonico_distanciaTrigger_cm   = data["sensorUltrasonico"]["distanciaTrigger_cm"]
+
+        return self

@@ -49,3 +49,4 @@ X i2c no bloqueante
 ?  que la rpi funcione inicie sin internet pero se reinicie a la noche para conectarse 
   
    que envie los mails pendientes cuando haya internet pero que sea chequeando el contenido de Intrusos.txt
+

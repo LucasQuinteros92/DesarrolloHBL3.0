@@ -36,12 +36,12 @@
             "in1": {
                 "activado": 1,
                 "logica": "NA",
-                "id": "IR1"
+                "id": "Entrada 1"
             },
             "in2": {
                 "activado": 1,
                 "logica": "NA",
-                "id": "IR2"
+                "id": "Echo"
             },
             "in3": {
                 "activado": 0,
@@ -57,7 +57,7 @@
         "out": {
             "out1": {
                 "activado": 1,
-                "id": "Sirena",
+                "id": "Trigger",
                 "repeticion": 3,
                 "tiempo": 1
             },
@@ -100,16 +100,16 @@
     "network": {
         "activado": 1,
         "eth0": {
-            "activado": 0,
+            "activado": 1,
             "dhcp": 1,
-            "static_ip_address": "172.16.232.148/24",
-            "static_routers": "192.168.1.1",
+            "static_ip_address": "172.16.232.117/24",
+            "static_routers": "",
             "gateway": "172.16.0.1",
-            "DNS": "172.19.201.17 172.19.201.18",
+            "DNS": "",
             "metric": 0,
-            "netmask": "255.255.255.0",
-            "network": "172.16.23.30",
-            "broadcast": "8.8.8.8"
+            "netmask": "255.255.0.0",
+            "network": "",
+            "broadcast": "172.16.255.255"
         },
         "wlan0": {
             "activado": 1,
@@ -274,7 +274,9 @@
         "hblTimer": "hblTimer.log",
         "hblPuerta": "hblPuerta.log",
         "hblBioStar2_WebSocket": "hblBioStar2_WebSocket.log",
-        "hblMail": "hblMail.log"
+        "hblMail": "hblMail.log",
+        "hblCamaraRPI": "hblCamaraRPI.log",
+        "hblSensorUltrasonico": "hblSensorUltrasonico.log"
     },
     "reporte": {
         "activado": 0,
@@ -366,13 +368,15 @@
     },
     "Mail": {
         "activado": 1,
+        "activado": 1,
         "destinatarios": [
-            "lqu@jphlions.com"
+            "dss@jphlions.com"
         ],
         "remitente": "rpi@jphlions.com",
         "user": "lqu@jphlions.com",
         "key": "KLfNzGbp9Zk7HtU3",
-        "subject": "Intruso detectado"
+        "subject": "Intruso detectado",
+        "message": "Se ha detectado un intrusoa a las : "
     },
     "BioStar2_WebSocket": {
         "activado": 1,
@@ -385,5 +389,19 @@
         "Device_ID": "539325963",
         "BioStar2_User": "admin",
         "BioStar2_Password": "Jphlions135"
+    },
+    "Camara_RPI": {
+        "activado": 1,
+        "Resolucion": [
+            640,
+            480
+        ],
+        "Path_Relativo": "Videos/",
+        "Duracion_Video_seg": 0
+    },
+    "sensorUltrasonico": {
+        "activado": 1,
+        "cantidadMuestras": 3,
+        "distanciaTrigger_cm": 50
     }
 }

@@ -49,6 +49,7 @@ from modulos.encoderWiegand import Encoder
 from modulos.salidas import Salidas
 from modulos.entradas import Entradas
 from modulos import variablesGlobales as variablesGlobales
+from modulos import moduloTest1 as moduloTest1
 
 global pi
 
@@ -63,6 +64,7 @@ global pi
 def receiveSignal(signalNumber, frame):
     print("Signal received: ", signalNumber)
     print("Cleaning ...")
+    
     hidDevice.threadCount()
     try:
         w1.cancel()                         # cancela el callback de wiegand
@@ -86,12 +88,15 @@ def receiveSignal(signalNumber, frame):
 -------------------------------------------------------------------------------------------- """
 
 if __name__ == "__main__":
+    
+    
 
     def callback():
         pass
 
     pi = pigpio.pi()
 
+    
     # cargar parametros del archivo de configuracion
     hbl.cargarParametros('hbl.json')
 
@@ -106,7 +111,7 @@ if __name__ == "__main__":
     main.Entradas(pi, variablesGlobales.Pin_Entrada1,
                   variablesGlobales.Pin_Entrada2,
                   variablesGlobales.Pin_Entrada3,
-                  variablesGlobales.Pin_W2_WD1)
+                  variablesGlobales.Pin_Entrada4)
 
     # inicializa decoder wiegand
     if hbl.WD_W1_activado == 1:
@@ -175,6 +180,10 @@ if __name__ == "__main__":
     # BioStar2_WebSocket.inicializacion()
 
     websocket = BioStar2_WebSocket.BioStar2_WebSocket()
+    
+    
+    #moduloPrueba.ModuloPrueba()
+    #moduloTest1()
 
     b = datetime.datetime.now()
     print("HBL READY")
@@ -184,9 +193,12 @@ if __name__ == "__main__":
 
 
         a = datetime.datetime.now()
-        funcionamiento.Control(pi)
+        
 
         c = a-b
+        
+        if c.total_seconds() >= 0.5:
+            funcionamiento.Control(pi)
 
         if c.total_seconds() >= 500:
             Monitoreo.Control()

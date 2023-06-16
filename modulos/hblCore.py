@@ -370,7 +370,10 @@ def getVolumeNames(drive):
 
 def heartBeat(pi):
     ##auxiliar.EscribirFuncion("heartBeat")
+<<<<<<< HEAD
     
+=======
+>>>>>>> 1bc0f66ad3e87c37389319b87841ad86ddfeacdc
     delay = 500
     try:
         while True:
@@ -382,9 +385,13 @@ def heartBeat(pi):
             if variablesGlobales.internet:
                 delay = 200
             else:
+<<<<<<< HEAD
                 delay = 2000
             
             
+=======
+                delay = 1000
+>>>>>>> 1bc0f66ad3e87c37389319b87841ad86ddfeacdc
                 
     except Exception as e:  
 

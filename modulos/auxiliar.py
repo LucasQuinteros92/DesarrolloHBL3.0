@@ -265,6 +265,23 @@ def CheckTarea(id):
             flag = True
     return flag
 
+def ReadPin(pin,pi,on,off):
+    # wait for pin to change value
+    # it needs to be stable for a continuous 20ms
+    value = pi.read(pin)
+    active = 0
+    if value!=off:
+        return off
+        
+    while active < 20:
+        if pi.read(pin) == on:
+            active += 1
+        else:
+            active = 0
+            break
+        time.sleep(0.001)
+    
+
 
 
 '''
